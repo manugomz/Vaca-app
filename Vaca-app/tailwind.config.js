@@ -8,10 +8,17 @@ export default {
     extend: {
       colors:{
         'cafe': '#36190D',
+        'verde':'#6eab63',
+        'azul':'#4f80a4',
+        'morado':'#a65293',
+        'rojo':'#ff131e',
       },
-      // fontFamily:{
-      //   'fredoka':['Fredoka','sans-serif'],
-      // }
+      fontFamily:{
+      fredoka:'Fredoka',
+      },
+      boxShadow:{
+        'sombra': '0px 3px 5px 1px rgba(0,0,0,0.2)',
+      }
     },
   },
   plugins: [],

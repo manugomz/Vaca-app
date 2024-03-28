@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @font-face {
+      font-family: 'Fredoka';
+      font-style: normal;
+      src: url(./assets/FredokaOne-Regular.ttf);
+    }
+}

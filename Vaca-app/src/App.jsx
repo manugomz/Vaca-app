@@ -1,25 +1,21 @@
-import { useState } from 'react'
+import {Routes,Route,BrowserRouter} from 'react-router-dom';
 import './App.css'
+import Header from './components/Header'
+import Groups from './containers/Grupos';
+import Gastos from './containers/Gastos';
+import Amigos from './containers/Amigos';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <Header/>
+    <Routes>
+      <Route path='/' element={<Groups/>}/>
+      <Route path='/Amigos' element={<Amigos/>}/>
+      <Route path='/Gastos' element={<Gastos/>}/>
+      <Route path='/Grupos' element={<Groups/>}/>
+    </Routes>
     </>
   )
 }
