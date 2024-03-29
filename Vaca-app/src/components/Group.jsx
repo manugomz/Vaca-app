@@ -1,5 +1,6 @@
 import React from 'react'
 import Logo from './Logo'
+import { useEffect,useState } from 'react';
 
 //TODO: Link redirecting "http://localhost:5173/Grupos#/Grupos"
 
@@ -10,6 +11,21 @@ const Group = () => {
         img:'bg-blue-500 size-[4.5em] rounded-md flex justify-center items-center',
     }
 
+    const [groups,setgroups]= useState([]);
+
+    useEffect(()=>{
+      const groups = fetch('http://localhost:3000/groups');
+      groups.then(
+        (res)=>res.json().then(data=>{
+          console.info('response',data);
+          setgroups(data);
+        }),(err=>{
+          console.info('request error',err)
+        })
+      )
+    },[])
+
+    console.log('groups',groups)
 
     const valor="45.000";
   return (
