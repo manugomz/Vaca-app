@@ -16,9 +16,9 @@ const Header = () => {
         <nav>
             <ul className='flex justify-between py-3 text-lg'>
                 
-                <li><Link className='p-2' to='Amigos'>Amigos</Link></li>
-                <li><Link className='p-2' to='Gastos'>Gastos</Link></li>
-                <li><Link className='p-2' to='Grupos'>Grupos</Link></li>
+                <li className='hover:border-b-1 border-white rounded-sm'><Link className='p-2' to='Amigos'>Amigos</Link></li>
+                <li className='hover:border-b-1 border-white rounded-sm'><Link className='p-2' to='Gastos'>Gastos</Link></li>
+                <li className='hover:border-b-1 border-white rounded-sm'><Link className='p-2' to='Grupos'>Grupos</Link></li>
             </ul>
         </nav>
         <IoPersonCircleSharp className="text-4xl hidden md:inline"/>
