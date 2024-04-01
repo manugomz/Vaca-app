@@ -2,8 +2,7 @@
 const groupDB = [
   {
     name: "Gorilla Logic",
-    out: 37000,
-    in:0,
+    amount:2000,
     members: ['Migue','Cesar','Lili']
   },
   {
