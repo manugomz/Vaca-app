@@ -8,6 +8,7 @@ export default {
     extend: {
       colors:{
         'cafe': '#36190D',
+        'cafe-light':'#725e55',
         'verde':'#6eab63',
         'azul':'#4f80a4',
         'morado':'#a65293',

@@ -12,9 +12,9 @@ function App() {
     <Header/>
     <Routes>
       <Route path='/' element={<Groups/>}/>
-      <Route path='/Amigos' element={<Amigos/>}/>
-      <Route path='/Gastos' element={<Gastos/>}/>
-      <Route path='/Grupos' element={<Groups/>}/>
+      <Route path='/amigos' element={<Amigos/>}/>
+      <Route path='/gastos' element={<Gastos/>}/>
+      <Route path='/grupos' element={<Groups/>}/>
     </Routes>
     </>
   )
