@@ -1,19 +1,25 @@
 //persistencia
 const groupDB = [
   {
+    id:1,
+    color:'#a65293',
+    total:2000,
+    members: ['Migue','Cesar','Lili'],
     name: "Gorilla Logic",
-    amount:2000,
-    members: ['Migue','Cesar','Lili']
   },
   {
+    id:2,
+    color:'#4f80a4',
+    total:-3000,
+    members: ['Juangui','Adri','Vicky'],
     name: "WWC",
-    amount:-3000,
-    members: ['Juangui','Adri','Vicky']
   },
   {
+    id:3,
+    color:'#6eab63',
+    total:5000,
+    members: ['Maria Alejandra','Luisa','Juangui'],
     name: "Navigating",
-    amount:5000,
-    members: ['Maria Alejandra','Luisa','Juangui']
   },
 ];
 

@@ -1,7 +1,8 @@
 const groupService = require("../services/groups");
 
 const getAll = (req,res)=>{
-    const groups = groupService.getAll();
+    const sort = req.query.sort || "asc";
+    const groups = groupService.getAll(sort);
     res.json(groups);
 }
 
@@ -15,13 +16,16 @@ const get = (req,res)=>{
     res.status(200).json(group);
 }
 
-// const create = (req,res) =>{
-//     const newPet=req.body;
-//     const createdPet= groupService.create(newPet);
-//     res.status(201).json(createdPet);  
-// }
+
+
+const create = (req,res) =>{
+    const newGroup=req.body;
+    const createdGroup= groupService.create(newGroup);
+    res.status(201).json(createdGroup);  
+}
 
 module.exports={
     getAll,
     get,
+    create
 }
