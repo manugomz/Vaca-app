@@ -10,6 +10,7 @@ const GroupsRouter= ()=>{
     // configuracion de rutas
     router.get('/groups', continuator(controller.getAll));
     router.get('/group/:id', continuator(controller.getById));
+    router.delete('/group/:id', continuator(controller.deleteById));
     
 
 

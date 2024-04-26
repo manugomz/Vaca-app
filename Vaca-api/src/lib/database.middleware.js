@@ -14,6 +14,7 @@ const pool = new Pool({
 const requireTransactionMap = {
   POST: true,
   PUT: true,
+  DELETE:true,
 };
 
 const connectDatabase = async (req, res, next) => {
