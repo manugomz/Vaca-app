@@ -1,20 +1,18 @@
-import Router from 'express-promise-router';
-import Controller from '../controllers/groups.controller.js';
-import continuator from '../lib/continue.decorator.js';
+import Router from "express-promise-router";
+import Controller from "../controllers/groups.controller.js";
+import continuator from "../lib/continue.decorator.js";
 
-const GroupsRouter= ()=>{
+const GroupsRouter = () => {
+  const router = Router();
+  const controller = Controller();
 
-    const router = Router();
-    const controller = Controller();
+  // configuracion de rutas
+  router.get("/groups", continuator(controller.getAll));
+  router.get("/groups/:id", continuator(controller.getById));
+  router.delete("/groups/:id", continuator(controller.deleteById));
+  router.post("/groups", continuator(controller.create));
 
-    // configuracion de rutas
-    router.get('/groups', continuator(controller.getAll));
-    router.get('/group/:id', continuator(controller.getById));
-    router.delete('/group/:id', continuator(controller.deleteById));
-    
-
-
-    return router
+  return router;
 };
 
-export default GroupsRouter
+export default GroupsRouter;
