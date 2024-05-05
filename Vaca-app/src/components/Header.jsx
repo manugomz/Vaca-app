@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="font-fredoka bg-cafe text-white py-3 px-5 md:flex md: justify-between">
+    <div className="font-fredoka bg-brown-p text-white py-3 px-5 md:flex md: justify-between">
       <div className="flex justify-between">
         <div className="flex items-baseline">
           <Logo />

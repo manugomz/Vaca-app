@@ -6,13 +6,14 @@ export default {
   ],
   theme: {
     extend: {
+      //!yellow,white and pink mising
       colors:{
-        'cafe': '#36190D',
-        'cafe-light':'#725e55',
-        'verde':'#6eab63',
-        'azul':'#4f80a4',
-        'morado':'#a65293',
-        'rojo':'#ff131e',
+        'brown-p': '#36190D',
+        'brown-p-light':'#b3715b',
+        'green-p':'#6eab63',
+        // 'blue-p':'#4f80a4',
+        // 'purple-p':'#a65293',
+        'red-p':'#ff131e',
       },
       fontFamily:{
       fredoka:'Fredoka',

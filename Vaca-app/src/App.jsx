@@ -4,6 +4,9 @@ import Header from './components/Header'
 import Groups from './containers/Grupos';
 import Gastos from './containers/Gastos';
 import Amigos from './containers/Amigos';
+import GroupDetails from './components/GroupDetails';
+
+//? Estilo para los botones generalizado
 
 function App() {
 
@@ -11,10 +14,10 @@ function App() {
     <>
     <Header/>
     <Routes>
-      <Route path='/' element={<Groups/>}/>
       <Route path='/amigos' element={<Amigos/>}/>
       <Route path='/gastos' element={<Gastos/>}/>
       <Route path='/grupos' element={<Groups/>}/>
+      <Route path='/grupos/detalle-de-grupo/' element={<GroupDetails/>}/>
     </Routes>
     </>
   )
