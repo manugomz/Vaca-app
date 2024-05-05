@@ -1,25 +1,25 @@
 //Responsabilidad: Lllevar otraer datos de la base de datos NADA MÁS
-
-const COUNT_BY_NAME = `${GET_ALL} WHERE name = $1`;
-const CREATE = `INSERT INTO groups (name,color) 
-                VALUES ($1,$2)
-                RETURNING id, name, color`;
+const CREATE = `INSERT INTO groups (name,color, ownerUserId) VALUES ($1,$2,$3) RETURNING id, name, color, ownerUserId`;
+const COUNT_BY_NAME = `SELECT COUNT(*) as count FROM groups WHERE name = $1 `;
 const DELETE_BY_ID = `DELETE FROM groups WHERE id = $1`;
-const GET_ALL = `SELECT id, name, color FROM groups`;
-const GET_BY_ID = `SELECT COUNT(*) as count FROM groups WHERE name = $1 `;
+
+const GET_ALL = `SELECT * FROM groups ORDER BY name`;
+const GET_BY_ID = `SELECT * FROM groups WHERE id = $1`;
+
 
 export const Repository = (dbClient) => {
 
-  const countByName = async (name) => {
-    const result = await dbClient.query(COUNT_BY_NAME, [name]);
-    const count =parseInt(result.rows[0].count);
-    if(isNaN(count)){
-      throw 'Invalid count by name';
-    }
-    return count
-  };
-  const create = async ({ name, color }) => {
-    const result = await dbClient.query(CREATE, [name, color]);
+  // const countByName = async (name) => {
+  //   const result = await dbClient.query(COUNT_BY_NAME, [name]);
+  //   const count =parseInt(result.rows[0].count);
+  //   if(isNaN(count)){
+  //     throw 'Invalid count by name';
+  //   }
+  //   return count
+  // };
+  
+  const create = async ({ name, color, ownerUserId }) => {
+    const result = await dbClient.query(CREATE, [name, color,ownerUserId]);
     return result.rows[0];
   };
 
@@ -39,7 +39,7 @@ export const Repository = (dbClient) => {
   };
 
   return {
-    countByName,
+    // countByName,
     create,
     deleteById,
     getAll,

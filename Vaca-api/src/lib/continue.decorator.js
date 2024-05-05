@@ -6,7 +6,6 @@ function continueDecorator(controllerFunction){
             next();
         }catch(error){
             next(error);
-        }finally{
         }
     }
 }

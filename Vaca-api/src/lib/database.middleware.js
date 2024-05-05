@@ -36,7 +36,7 @@ const connectDatabase = async (req, res, next) => {
   }
 };
 
-const commitDatabase = async (req, rest, next) => {
+const commitDatabase = async (req, _rest, next) => {
   if (req.doTransaction){
     await req.dbClient.query('COMMIT');
   }
