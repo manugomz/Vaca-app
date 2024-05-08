@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Gastos = () => {
+const Friends = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const Gastos = () => {
   )
 }
 
-export default Gastos
+export default Friends
