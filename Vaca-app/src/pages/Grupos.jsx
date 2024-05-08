@@ -2,14 +2,16 @@ import React from "react";
 import useFetch from "../hooks/useFetch";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useMutation from "../hooks/useMutation";
 
-import SingleGroup from "../components/SingleGroup";
 import Logo from "../components/Logo";
 import Modal from "../components/Modal";
+import ModalConfirmation from "../components/ModalConfirmation";
+import SingleGroup from "../components/SingleGroup";
 
-//TODO!: Buttons hover and click animations
-//TODO: Sort groups
-//TODO: Responsive for WEB
+//TODO: Responsive for WEB (Buttons hover and click animations)
+
+const apiUrl=import.meta.env.VITE_API_URL;
 
 const Groups = () => {
   const styles = {
@@ -17,15 +19,17 @@ const Groups = () => {
     loadingRectangle: "bg-zinc-400 rounded-md animate-pulse",
     loadingButton: " text-zinc-400 px-3 py-1 shadow-sombra text-xs",
     button: `bg-brown-p text-white
-    px-3 py-1
-    shadow-sombra rounded-md 
-    text-xs 
-    hover:bg-brown-p-light
-    focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p
-    active:outline-none active:ring-brown-p`,
+            px-3 py-1
+            shadow-sombra rounded-md 
+            text-xs 
+            hover:bg-brown-p-light
+            focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p
+            active:outline-none active:ring-brown-p`,
   };
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalConfirmOpen, setModalConfirmOpen] = useState(false);
+  const [currentId, setCurrentId] = useState(0);
 
   const navigate = useNavigate();
 
@@ -33,7 +37,23 @@ const Groups = () => {
     data: groups,
     loading,
     error,
-  } = useFetch("http://localhost:3000/groups/");
+    reFetch,
+  } = useFetch(`${apiUrl}/groups/`);
+
+  const deleteGroupMutation = useMutation(
+    `${apiUrl}/groups/`,
+    false,
+    "DELETE"
+  );
+
+  const total = -50_000;
+
+  const deleteGroup = async (id) => {
+    try {
+      await deleteGroupMutation.mutate(null, id);
+      reFetch();
+    } catch {}
+  };
 
   if (loading) {
     return (
@@ -97,8 +117,19 @@ const Groups = () => {
       <main className={styles.container}>
         {modalOpen && (
           <Modal
+            reFetch={reFetch}
             onClose={() => {
               setModalOpen(false);
+            }}
+          />
+        )}
+        {modalConfirmOpen && (
+          <ModalConfirmation
+            id={currentId}
+            onDelete={deleteGroup}
+            onClose={() => {
+              setCurrentId(0);
+              setModalConfirmOpen(false);
             }}
           />
         )}
@@ -106,14 +137,14 @@ const Groups = () => {
           data-modal-target="crud-modal"
           data-modal-toggle="crud-modal"
           type="button"
-          className= {styles.button +" w-1/3 text-sm self-end"}
+          className={styles.button + " w-1/3 text-sm self-end"}
           onClick={() => setModalOpen(true)}
         >
           Nuevo grupo
         </button>
         <div>
           <p className="">Debes</p>
-          <p className="text-rojo text-xl">$45.000</p>
+          <p className="text-red-p text-xl">$45.000</p>
         </div>
         {groups &&
           groups.map((group) => {
@@ -125,14 +156,16 @@ const Groups = () => {
                 error={error}
               >
                 <p>{group.name}</p>
-                {group.total > 0 ? (
+                {total > 0 ? (
                   <p className="text-xs">
-                    Te deben:{" "}
-                    <strong className="text-green-p">{group.total}</strong>
+                    Te deben: <strong className="text-green-p">{total}</strong>
                   </p>
                 ) : (
                   <p className="text-xs">
-                    Debes: <strong className="text-red-p">{group.total}</strong>
+                    Debes:{" "}
+                    <strong className="text-red-p">
+                      {total.toString().slice(1)}
+                    </strong>
                   </p>
                 )}
 
@@ -140,13 +173,21 @@ const Groups = () => {
                   <button
                     className={styles.button}
                     onClick={() => {
-                      navigate("/grupos/detalle-de-grupo/");
+                      navigate(`/grupos/${group.id}`);
                     }}
                   >
                     Editar
                   </button>
 
-                  <button className={styles.button}>Eliminar</button>
+                  <button
+                    className={styles.button}
+                    onClick={() => {
+                      setModalConfirmOpen(true);
+                      setCurrentId(group.id);
+                    }}
+                  >
+                    Eliminar
+                  </button>
                 </div>
               </SingleGroup>
             );

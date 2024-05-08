@@ -33,17 +33,15 @@ const SingleGroup = ({ group,loading,error, children}) => {
           ></div>
           <div className="flex gap-3 pt-2">
             <button className={styles.loadingButton + styles.loadingRectangle}>
-              Editar
             </button>
             <button className={styles.loadingButton + styles.loadingRectangle}>
-              Eliminar
             </button>
           </div>
         </div>
       </div>
     );
 
-    //! Container
+    // Container
 
   } else if (group) {
     return (

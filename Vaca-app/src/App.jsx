@@ -1,26 +1,29 @@
-import {Routes,Route,BrowserRouter} from 'react-router-dom';
-import './App.css'
-import Header from './components/Header'
-import Groups from './containers/Grupos';
-import Gastos from './containers/Gastos';
-import Amigos from './containers/Amigos';
-import GroupDetails from './components/GroupDetails';
+import { Suspense, lazy } from "react";
+import { Routes, Route } from "react-router-dom";
+import "./App.css";
+
+import Header from "./components/Header";
+const Groups = lazy(() => import("./pages/Grupos"));
+const Gastos = lazy(() => import("./pages/Gastos"));
+const Amigos = lazy(() => import("./pages/Amigos"));
+const GroupDetails = lazy(() => import("./pages/GroupDetails"));
 
 //? Estilo para los botones generalizado
 
 function App() {
-
   return (
     <>
-    <Header/>
-    <Routes>
-      <Route path='/amigos' element={<Amigos/>}/>
-      <Route path='/gastos' element={<Gastos/>}/>
-      <Route path='/grupos' element={<Groups/>}/>
-      <Route path='/grupos/detalle-de-grupo/' element={<GroupDetails/>}/>
-    </Routes>
+      <Suspense fallback={<div>Loading</div>}>
+        <Header />
+        <Routes>
+          <Route path="/amigos" element={<Amigos />} />
+          <Route path="/gastos" element={<Gastos />} />
+          <Route path="/grupos" element={<Groups />} />
+          <Route path="/grupos/:id" element={<GroupDetails />} />
+        </Routes>
+      </Suspense>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
