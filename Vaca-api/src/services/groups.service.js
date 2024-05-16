@@ -1,6 +1,6 @@
 //Se encarga de las validaciones, capa más densa
 
-import { Repository } from '../repositories/group.repository.js'
+import { Repository } from '../repositories/groups.repository.js'
 import AppError from '../lib/application.error.js'
 
 const Service = (dbClient) => {

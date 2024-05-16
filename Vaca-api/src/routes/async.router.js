@@ -12,6 +12,7 @@ const AsyncRouter =()=>{
 
     router.use(connectDatabase);
     router.use('/groups',groupsRouter());
+    //router.use('/users', usersRoter());
     router.use(commitDatabase);
     router.use(rollbackDatabase);
 

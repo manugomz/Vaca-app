@@ -57,7 +57,6 @@ const rollbackDatabase = async (err, req, res, next) => {
     }
     console.info("---ERROR---")
     console.error(err)
-    //TODO: Need a way to detect app error from system error
     let errorCode = 500
     if (err.isApplicationError === true) {
         errorCode = err.errorCode
