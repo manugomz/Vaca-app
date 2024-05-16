@@ -60,7 +60,7 @@ export default function Modal({ onClose, reFetch }) {
     },
   ];
 
-  const [errorMsg, setErrorMsg] = useState("ERROR");
+  const [errorMsg, setErrorMsg] = useState("");
   const [newGroup, setNewGroup] = useState({
     ownerUserId: 1,
     name: "",
@@ -112,7 +112,8 @@ export default function Modal({ onClose, reFetch }) {
             onChange={handleInputChange}
             autoFocus
             required
-          />
+          /> 
+          
         </fieldset>
 
         <fieldset className={style.colorsFieldset}>

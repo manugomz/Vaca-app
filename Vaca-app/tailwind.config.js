@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       animation:{
-        wave1: 'wave 12s infinite linear',
-        wave2: 'wave 8s infinite linear',
-        wave3: 'wave 10s infinite linear',
+        wave1: 'wave 14s infinite linear',
+        wave2: 'wave 10s infinite linear',
+        wave3: 'wave 12s infinite linear',
       },
       keyframes:{ 
         wave:{

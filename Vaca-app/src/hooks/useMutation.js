@@ -27,6 +27,7 @@ function useMutation(url, returnData = false, method = "post") {
         }
         return;
       } catch (error) {
+        //~ Error no viene del back
         setError(error.message);
       } finally {
         setIsLoading(false);

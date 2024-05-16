@@ -4,6 +4,8 @@ import "./App.css";
 
 import Header from "./components/Header";
 import Loader from "./components/Loader";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 const Groups = lazy(() => import("./pages/Groups"));
 const Expenses = lazy(() => import("./pages/Expenses"));
@@ -22,6 +24,8 @@ function App() {
           <Route path="/gastos" element={<Expenses />} />
           <Route path="/grupos" element={<Groups />} />
           <Route path="/grupos/:id" element={<GroupDetails />} />
+          <Route path="/registro" element={<Register/>} />
+          <Route path="/login" element={<Login/>} />
         </Routes>
       </Suspense>
     </>
