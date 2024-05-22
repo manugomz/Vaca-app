@@ -1,14 +1,12 @@
 import { useState, useCallback } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 function useMutation(url, returnData = false, method = "post") {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   const mutate = useCallback(
     async (data, id) => {
       setIsLoading(true);
-      setError(null);
 
       try {
         const response = await axios({
@@ -17,18 +15,17 @@ function useMutation(url, returnData = false, method = "post") {
           data: data || null,
         });
 
-        if (!response.status === 200) {
-          throw new Error("Failed to perform mutation");
-        }
-
         if (returnData) {
           const responseData = response.data;
           return responseData;
         }
         return;
-      } catch (error) {
-        //~ Error no viene del back
-        setError(error.message);
+      } catch (e) {
+        if(e instanceof AxiosError){
+          throw new Error(e.response.data.error)
+        }else{
+          throw new Error(e.message);
+        }
       } finally {
         setIsLoading(false);
       }
@@ -36,7 +33,7 @@ function useMutation(url, returnData = false, method = "post") {
     [url, method]
   );
 
-  return { mutate, isLoading, error };
+  return { mutate, isLoading };
 }
 
 export default useMutation;

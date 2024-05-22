@@ -59,16 +59,18 @@ export default function Modal({ onClose, reFetch }) {
       hex: "#ff131e",
     },
   ];
-
-  const [errorMsg, setErrorMsg] = useState("");
+  
+  const [error, setError] = useState(null);
   const [newGroup, setNewGroup] = useState({
     ownerUserId: 1,
     name: "",
     color: "#FFF",
   });
+
   const createGroupMutation = useMutation("http://localhost:3000/groups/");
 
   const handleInputChange = (event) => {
+    setError(null);
     const { name, value } = event.target;
     setNewGroup({
       ...newGroup,
@@ -78,16 +80,13 @@ export default function Modal({ onClose, reFetch }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    onClose();
-
     try {
       await createGroupMutation.mutate(newGroup);
-      if (createGroupMutation.error) {
-        setErrorMsg(createGroupMutation.error);
-      }
+      onClose();
       reFetch();
+
     } catch (e) {
-      setErrorMsg(e.message);
+    setError(e.message);
     }
   };
 
@@ -143,7 +142,7 @@ export default function Modal({ onClose, reFetch }) {
         >
           Crear
         </button>
-        <p className="text-red-p py-1">{errorMsg}</p>
+        <p className="text-red-p py-1">{error}</p>
       </form>
     </div>
   );
