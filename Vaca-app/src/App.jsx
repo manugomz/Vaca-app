@@ -2,17 +2,20 @@ import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
+import Expenses from "./pages/Expenses";
+import Friends from "./pages/Friends";
+import Groups from "./pages/Groups";
+import GroupDetails from "./pages/GroupDetails";
 import Header from "./components/Header";
 import Loader from "./components/Loader";
 import Register from "./pages/Register";
-import Login from "./pages/Login";
 
-const Groups = lazy(() => import("./pages/Groups"));
-const Expenses = lazy(() => import("./pages/Expenses"));
-const Friends = lazy(() => import("./pages/Friends"));
-const GroupDetails = lazy(() => import("./pages/GroupDetails"));
-
-//? Estilo para los botones generalizado
+//const Login = lazy(() => import("./pages/Login"));
+const Login = lazy(() => {
+  return new Promise(resolve => {
+    setTimeout(() => resolve(import("./pages/Login")), 1000);
+  });
+});
 
 function App() {
   return (
