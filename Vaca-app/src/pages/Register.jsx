@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import LogoDecoration from "../assets/LogoDecoration.svg?react" 
 
 import useMutation from "../hooks/useMutation";
 
@@ -37,7 +38,7 @@ export default function Register() {
 
   return (
     <div className="p-10 font-fredoka flex flex-col items-center">
-      <img src='../src/assets/LogoDecoration.svg' width="240" />
+      <LogoDecoration width={240} />
       <form action="POST">
         <h1 className="text-brown-p-light text-center text-xl py-5">Registro</h1>
         <input
