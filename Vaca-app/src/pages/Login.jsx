@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LogoDecoration from "../assets/LogoDecoration.svg?react" 
 
 export default function Login() {
   const style = {
@@ -28,7 +29,7 @@ export default function Login() {
 
   return (
     <div className="p-10 font-fredoka flex flex-col items-center">
-      <img src="../src/assets/LogoDecoration.svg" width="240" />
+      <LogoDecoration width={240} />
       <form action="POST">
         <h1 className="text-brown-p-light text-center text-xl py-5">
           Iniciar sesión
