@@ -1,20 +1,22 @@
 //Capa de presentación
-import Router from "express-promise-router"
-import Controller from "../controllers/groups.controller.js"
-import continuator from "../lib/continue.decorator.js"
+import Router from 'express-promise-router';
+import Controller from '../controllers/groups.controller.js';
+import continuator from '../lib/continue.decorator.js';
+import validate from '../lib/validation.middleware.js';
+import schema from '../schemas/group.schema.js';
 
 const GroupsRouter = () => {
-    const router = Router()
-    const controller = Controller()
+    const router = Router();
+    const controller = Controller();
 
     // configuracion de rutas
-    router.get("/", continuator(controller.getAll))
-    router.get("/:id", continuator(controller.getById))
-    router.delete("/:id", continuator(controller.deleteById))
-    router.post("/", continuator(controller.create))
-    router.put("/:id", continuator(controller.fullUpdateById))
+    router.get('/', continuator(controller.getAll));
+    router.get('/:id', continuator(controller.getById));
+    router.delete('/:id', continuator(controller.deleteById));
+    router.post('/', validate({ body: schema }), continuator(controller.create));
+    router.put('/:id', continuator(controller.fullUpdateById));
 
-    return router
-}
+    return router;
+};
 
-export default GroupsRouter
+export default GroupsRouter;

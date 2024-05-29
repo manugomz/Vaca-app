@@ -1,55 +1,55 @@
-import Service from '../services/groups.service.js'
-import { StatusCodes } from 'http-status-codes'
+import Service from '../services/groups.service.js';
+import { StatusCodes } from 'http-status-codes';
 
 const Controller = () => {
     const create = async (req, res) => {
-        const service = Service(req.dbClient)
-        const group = req.body
-        const createdGroup = await service.create(group)
-        res.status(StatusCodes.CREATED).json(createdGroup)
-    }
+        const service = Service(req.dbClient);
+        const group = req.body;
+        const createdGroup = await service.create(group);
+        res.status(StatusCodes.CREATED).json(createdGroup);
+    };
 
     const deleteById = async (req, res) => {
-        const service = Service(req.dbClient)
-        const deleted = await service.deleteById(req.params.id)
+        const service = Service(req.dbClient);
+        const deleted = await service.deleteById(req.params.id);
 
         if (!deleted) {
-            res.status(StatusCodes.NOT_FOUND).end()
+            res.status(StatusCodes.NOT_FOUND).end();
         } else {
-            res.status(StatusCodes.OK).end()
+            res.status(StatusCodes.OK).end();
         }
-    }
+    };
 
     const fullUpdateById = async (req, res) => {
-        const service = Service(req.dbClient)
-        const id = req.params.id
-        const group = { ...req.body, id }
-        const updatedGroup = await service.fullUpdateById(group)
+        const service = Service(req.dbClient);
+        const id = req.params.id;
+        const group = { ...req.body, id };
+        const updatedGroup = await service.fullUpdateById(group);
 
-        if (updatedGroup) {
-            res.status(StatusCodes.OK).end()
+        if (!updatedGroup) {
+            res.status(StatusCodes.NOT_FOUND);
         } else {
-            res.status(StatusCodes.NOT_FOUND)
+            res.status(StatusCodes.OK).end();
         }
-    }
+    };
 
     const getAll = async (req, res) => {
-        const service = Service(req.dbClient)
-        const groups = await service.getAll()
+        const service = Service(req.dbClient);
+        const groups = await service.getAll();
 
-        res.status(StatusCodes.OK).json(groups)
-    }
+        res.status(StatusCodes.OK).json(groups);
+    };
 
     const getById = async (req, res) => {
-        const service = Service(req.dbClient)
-        const group = await service.getById(req.params.id)
+        const service = Service(req.dbClient);
+        const group = await service.getById(req.params.id);
 
         if (!group) {
-            res.status(StatusCodes.NOT_FOUND).end()
+            res.status(StatusCodes.NOT_FOUND).end();
         } else {
-            res.status(StatusCodes.OK).json(group)
+            res.status(StatusCodes.OK).json(group);
         }
-    }
+    };
 
     return {
         create,
@@ -57,7 +57,7 @@ const Controller = () => {
         fullUpdateById,
         getAll,
         getById,
-    }
-}
+    };
+};
 
-export default Controller
+export default Controller;
