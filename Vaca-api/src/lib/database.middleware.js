@@ -31,7 +31,6 @@ const connectDatabase = async (req, res, next) => {
         console.info('database connected');
         next();
     } catch (err) {
-        //res.status(503).end()
         next(err);
     }
 };

@@ -1,7 +1,6 @@
 import Joi from 'joi';
 
 const schema = Joi.object({
-    owneruserid:Joi.number(),
     name: Joi.string().trim().min(3).max(30).required().messages({
         'string.empty': 'El grupo debe tener un nombre',
         'string.min': 'El nombre debe tener mínimo 3 caracteres',
