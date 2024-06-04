@@ -2,6 +2,8 @@ import Router from 'express-promise-router';
 import Controller from '../controllers/users.controller.js';
 import continuator from '../lib/continue.decorator.js';
 
+//! TODO: Add schema
+
 const UsersRouter = () => {
     const router = Router();
     const controller = Controller();

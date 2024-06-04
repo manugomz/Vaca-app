@@ -1,6 +1,7 @@
 const CREATE = 'INSERT INTO users (name, email, password) VALUES ($1, $2, $3)';
 const GET_ALL = 'SELECT * FROM users';
 const GET_BY_ID = 'SELECT * FROM users WHERE userid = $1';
+const GET_BY_EMAIL = 'SELECT * FROM users WHERE email = $1';
 const DELETE_BY_ID = `DELETE FROM users WHERE userid = $1`;
 
 const COUNT_BY_EMAIL = `SELECT COUNT(*) as count FROM users WHERE email = $1`;
@@ -30,10 +31,15 @@ export const Repository = (dbClient) => {
         return result.rows;
     };
 
+    const getByEmail = async (email) => {
+        const result = await dbClient.query(GET_BY_EMAIL, [email]);
+        return result.rows[0];
+    };
+
     const getById = async (id) => {
         const result = await dbClient.query(GET_BY_ID, [id]);
         return result.rows[0];
     };
 
-    return { getAll, getById, create, countByEmail, deleteById };
+    return { getAll, getByEmail, getById, create, countByEmail, deleteById };
 };
