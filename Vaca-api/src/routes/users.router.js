@@ -10,9 +10,9 @@ const UsersRouter = () => {
 
     // configuracion de rutas
     router.get('/', continuator(controller.getAll));
-    router.get('/:id', continuator(controller.getById));
-    router.delete('/:id', continuator(controller.deleteById));
     router.post('/', continuator(controller.create));
+    router.delete('/:id', continuator(controller.deleteById));
+    router.get('/:id', continuator(controller.getById));
 
     return router;
 };

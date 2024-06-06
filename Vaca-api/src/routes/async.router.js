@@ -1,8 +1,8 @@
 import Router from 'express-promise-router';
 
+import authRouter from './auth.router.js';
 import groupsRouter from './groups.router.js';
 import usersRouter from './users.router.js';
-import authRouter from './auth.router.js';
 
 import { connectDatabase, commitDatabase, rollbackDatabase } from '../lib/database.middleware.js';
 

@@ -1,6 +1,6 @@
 import passport from 'passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { Repository } from '../repositories/users.repository.js';
+import Service from '../services/users.service.js';
 
 const options = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -9,17 +9,16 @@ const options = {
 };
 
 passport.use(
-    new Strategy(options, async function (jwt_payload, done, req) {
+    new Strategy(options, async function (req, jwtPayload, done) {
         try {
-            const repository = Repository(req.dbClient);
-            const user = await repository.getById(jwt_payload.id);
+            const user = await Service(req.dbClient).getByEmail(jwtPayload.email);
             if (user) {
                 return done(null, user);
             } else {
                 return done(null, false);
             }
-        } catch (e) {
-            return done(e);
+        } catch (err) {
+            return done(err, false);
         }
     }),
 );

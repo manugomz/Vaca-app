@@ -15,13 +15,16 @@ const Controller = () => {
                 .json({ message: 'Usuario y/o contraseña incorrectos' });
         }
 
-        const payload = { id: user.id, date: Date.now(), name: user.name };
+        const payload = { id: user.userid, date: Date.now(), email: user.email };
 
-        const token = jwt.sign(payload, process.env.JWT_SECRET);
+        const token = jwt.sign(payload, process.env.JWT_SECRET,{expiresIn:'2h'});
         res.json({ token });
     };
+    const check = async (_req, res) => {
+        res.send('you are authenticated');
+    };
 
-    return { login };
+    return { login, check };
 };
 
 export default Controller;
