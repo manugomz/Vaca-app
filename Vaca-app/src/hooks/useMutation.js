@@ -21,8 +21,8 @@ function useMutation(url, returnData = false, method = 'post') {
                 }
                 return;
             } catch (e) {
-                if (e instanceof AxiosError) { //! This is not working properly
-                    throw new Error(e.response.data.error);
+                if (e instanceof AxiosError) {
+                    throw new Error(e.response.data.message);
                 } else {
                     throw new Error(e.message);
                 }

@@ -1,20 +1,32 @@
 import { useState, useEffect } from 'react';
+import { redirect } from 'react-router-dom';
+
+const KEY = 'token';
 
 const useAuth = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(true);
 
     useEffect(() => {
-        const KEY = sessionStorage.getItem('token');
-
-        try {
-            //const token = JSON.parse(KEY); //* POR QUÉ NO ES NEESARIO?
-            if (KEY) {
-                setIsAuthenticated(true);
+        const checkAuth = () => {
+            const token = sessionStorage.getItem(KEY);
+            try {
+                if (token) {
+                    setIsAuthenticated(true);
+                } else {
+                    setIsAuthenticated(false);
+                }
+            } catch (error) {
+                setIsAuthenticated(false);
+                sessionStorage.removeItem(KEY);
             }
-        } catch (e) {
-            setIsAuthenticated(false);
-            sessionStorage.removeItem('token');
-        }
+        };
+        checkAuth();
+
+        window.addEventListener('storage', checkAuth);
+
+        return () => {
+            window.removeEventListener('storage', checkAuth);
+        };
     }, []);
 
     return { isAuthenticated };

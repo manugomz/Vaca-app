@@ -35,8 +35,9 @@ export default function Login() {
             window.sessionStorage.setItem('token', token['token']);
             window.sessionStorage.setItem('user', user.email);
             navigate(`/grupos`);
-        } catch (e) {
-            setErrorMsg('Usuario y/o contraseña incorrecto');
+        } catch (error) {
+            console.log(typeof error, error);
+            setErrorMsg(error.message);
         }
     };
 

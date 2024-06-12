@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Navigate } from 'react-router-dom';
 
 import Header from './Header';
 import { useAuth } from '../hooks/useAuth';
@@ -14,7 +15,7 @@ export default function ProtectedRoute({ Component }) {
                     <Component />
                 </>
             ) : (
-                <div>please log in</div> //* HOW TO REDIRET HERE
+                <Navigate to="/login" replace />
             )}
         </>
     );
