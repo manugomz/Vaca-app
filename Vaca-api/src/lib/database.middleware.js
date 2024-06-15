@@ -48,7 +48,7 @@ const commitDatabase = async (req, _rest, next) => {
 
 const rollbackDatabase = async (err, req, res, next) => {
     if (req.doTransaction && req.dbClient) {
-        console.log('rollback transaction ');
+        console.log('rollback transaction');
         await req.dbClient.query('ROLLBACK');
         req.dbClient.release();
         req.dbClient = undefined;

@@ -9,6 +9,7 @@ const Service = (dbClient) => {
         const email = user.email;
         const userByEmailCount = await repository.countByEmail(email);
         user.password = await bcrypt.hash(user.password, 10);
+
         if (userByEmailCount > 0) {
             throw AppError('Ya existe un usuario con ese correo', 409);
         }
