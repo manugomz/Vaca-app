@@ -1,4 +1,5 @@
 const validate = (schemas) => {
+
     return (req, res, next) => {
         const validationOptions = { abortEarly: false, allowUnknown: true, stripUnknown: true };
         const errors = [];
@@ -21,7 +22,16 @@ const validate = (schemas) => {
             }
         }
         if (errors.length > 0) {
-            return res.status(422).json({ error: errors });
+            const dataReturned = res.status(400).json({ error: errors });
+            if (req.doTransaction && req.dbClient) {
+                console.log('Closing connection');
+                req.dbClient.release();
+                req.dbClient = undefined;
+                req.doTransaction = undefined;
+            }
+            console.info('---ERROR---');
+            console.error(errors);
+            return dataReturned;
         } else {
             next();
         }

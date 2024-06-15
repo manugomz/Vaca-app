@@ -1,3 +1,5 @@
+import AppError from '../lib/application.error.js';
+
 const CREATE = 'INSERT INTO users (name, email, password) VALUES ($1, $2, $3)';
 const GET_ALL = 'SELECT * FROM users';
 const GET_BY_ID = 'SELECT * FROM users WHERE userid = $1';
@@ -16,7 +18,7 @@ export const Repository = (dbClient) => {
         const result = await dbClient.query(COUNT_BY_EMAIL, [email]);
         const count = parseInt(result.rows[0].count);
         if (isNaN(count)) {
-            throw 'Invalid countByEmail';
+            throw AppError('Invalid countByEmail', 400);
         }
         return count;
     };
