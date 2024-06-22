@@ -13,7 +13,7 @@ const schema = Joi.object({
         .required()
         .messages({
             'string.empty': 'Por favor elija un color',
-            '*': 'El color debe estar en formato hexadecimal, incluyendo el #',
+            '*': 'El formato del color es incorrecto',
         }),
 });
 

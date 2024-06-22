@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 const schema = Joi.object({
     name: Joi.string().trim().min(3).max(100).required().messages({
-        'string.empty': 'El usuario debe tener un nombre',
+        'string.empty': 'Por favor agrega tu nombre',
         'string.min': 'El nombre debe tener mínimo 3 caracteres',
         'string.max': 'El nombre no debe tener más de 100 caracteres',
     }),
@@ -14,11 +14,11 @@ const schema = Joi.object({
         .max(50)
         .required()
         .messages({
-            'string.empty': 'El email debe existir',
+            'string.empty': 'Por favor ingresar un email',
             'string.min': 'El email debe tener al menos 10 caracteres',
             'string.max': 'Email should have less than 50 characters',
             'string.base': `Email should be a type of 'email'`,
-            'string.email': 'Email must be a valid email',
+            '*': 'El email no tiene un formato válido',
         }),
 
     password: Joi.string()

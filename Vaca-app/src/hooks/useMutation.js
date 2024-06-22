@@ -22,7 +22,7 @@ function useMutation(url, returnData = false, method = 'post') {
                 return;
             } catch (e) {
                 if (e instanceof AxiosError) {
-                    throw new Error(e.response.data.message);
+                    throw new Error(e.response.data.error);
                 } else {
                     throw new Error(e.message);
                 }

@@ -61,7 +61,7 @@ const rollbackDatabase = async (err, req, res, next) => {
         errorCode = err.errorCode;
     }
     res.status(errorCode).json({
-        error: err.message || `can't process your request`,
+        error: [err.message || `Can't process your request`],
     });
     next();
 };
