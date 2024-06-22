@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import LogoDecoration from '../assets/LogoDecoration.svg?react';
+import { Navigate } from 'react-router-dom';
 
+import LogoDecoration from '../assets/LogoDecoration.svg?react';
 import useMutation from '../hooks/useMutation';
 
 export default function Register() {
@@ -10,7 +11,7 @@ export default function Register() {
     };
 
     const [newUser, setNewUser] = useState();
-    const [errorMsg, setErrorMsg] = useState('');
+    const [errorMessages, setErrorMessages] = useState([]);
 
     const createUserMutation = useMutation('http://localhost:3000/users/');
 
@@ -20,19 +21,21 @@ export default function Register() {
             ...newUser,
             [name]: value,
         });
+        setErrorMessages(null);
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        //TODO: Redirect
 
         try {
             await createUserMutation.mutate(newUser);
             if (createUserMutation.error) {
-                setErrorMsg(createUserMutation.error);
+                setErrorMessages(createUserMutation.error);
+            } else {
+                <Navigate to="/grupos" replace />;
             }
         } catch (e) {
-            setErrorMsg(e.message);
+            setErrorMessages(e.message.split(','));
         }
     };
 
@@ -72,10 +75,16 @@ export default function Register() {
                     autoFocus
                     required
                 />
-                <p className="text-red-p">{errorMsg}</p>
                 <button type="submit" className={style.button} onClick={handleSubmit}>
                     Registrarme
                 </button>
+                <ul className="list-disc pl-5 pt-5">
+                    {errorMessages?.map((error, index) => (
+                        <li className="text-red-p" key={index}>
+                            {error}
+                        </li>
+                    ))}
+                </ul>
             </form>
         </div>
     );

@@ -13,7 +13,7 @@ export default function Login() {
         buttonSecondary: `w-full text-brown-p border-brown-p border-2 rounded-md py-2 text-center mt-2 `,
     };
 
-    const [errorMsg, setErrorMsg] = useState('');
+    const [errors, setErrors] = useState([]);
     const [user, setUser] = useState('');
     const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ export default function Login() {
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setErrorMsg('');
+        setErrors([]);
         setUser({
             ...user,
             [name]: value,
@@ -36,8 +36,7 @@ export default function Login() {
             window.sessionStorage.setItem('user', user.email);
             navigate(`/grupos`);
         } catch (error) {
-            console.log(typeof error, error);
-            setErrorMsg(error.message);
+            setErrors(error.message.split(','));
         }
     };
 
@@ -66,7 +65,10 @@ export default function Login() {
                     autoFocus
                     required
                 />
-                <p className="text-red-p">{errorMsg}</p>
+
+                {errors?.map((error, i) => (
+                    <p key={i}>{error}</p>
+                ))}
                 <button type="submit" className={style.button} onClick={handleSubmit}>
                     Ingresar
                 </button>

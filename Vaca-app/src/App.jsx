@@ -13,9 +13,6 @@ import Loader from './components/Loader';
 import ProtectedRoute from './components/ProtectedRoute';
 import Register from './pages/Register';
 
-//const Login = lazy(() => import("./pages/Login"));
-
-console.log(import.meta.env.VITE_API_URL);
 axios.get(`http://localhost:3000/auth/check`, {
     headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }, //* NOT WORKING PROPERLY
 });
@@ -26,6 +23,7 @@ axios.get(`http://localhost:3000/auth/check`, {
 //         }
 //     });
 
+//const Login = lazy(() => import("./pages/Login")); //no timer
 const Login = lazy(() => {
     return new Promise((resolve) => {
         setTimeout(() => resolve(import('./pages/Login')), 1000);

@@ -12,12 +12,12 @@ const Controller = () => {
         if (!user || !(await bcrypt.compare(password, user.password))) {
             return res
                 .status(StatusCodes.UNAUTHORIZED)
-                .json({ message: 'Usuario y/o contraseña incorrectos' });
+                .json({ error: 'Usuario y/o contraseña incorrectos' });
         }
 
         const payload = { id: user.userid, date: Date.now(), email: user.email };
 
-        const token = jwt.sign(payload, process.env.JWT_SECRET,{expiresIn:'2h'});
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '2h' });
         res.json({ token });
     };
     const check = async (_req, res) => {
