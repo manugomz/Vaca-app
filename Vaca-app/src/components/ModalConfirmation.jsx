@@ -20,10 +20,10 @@ export default function ModalConfirmation({ onClose, onDelete, id }) {
                     bg-[rgb(0,0,0,0.5)]
                     font-fredoka`,
         modal: `flex flex-col self-center justify-self-center
-          py-4 px-8 gap-3
-          w-80
-          bg-white rounded-md
-          text-center`,
+                py-4 px-8 gap-3
+                w-80
+                bg-white rounded-md
+                text-center`,
     };
 
     return (
@@ -46,7 +46,13 @@ export default function ModalConfirmation({ onClose, onDelete, id }) {
                     >
                         Sí
                     </button>
-                    <button type="submit" className={style.buttonNo}>
+                    <button
+                        type="submit"
+                        className={style.buttonNo}
+                        onClick={() => {
+                            onClose(true);
+                        }}
+                    >
                         No
                     </button>
                 </div>

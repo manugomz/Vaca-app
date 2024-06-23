@@ -1,14 +1,13 @@
 import React from 'react';
 import Logo from './Logo';
-import useFetch from '../hooks/useFetch';
 
-const SingleGroup = ({ group, loading, error, children }) => {
+const SingleGroup = ({ group, loading, children }) => {
     const styles = {
         container: `flex justify-around items-center
                 shadow-sombra
                 py-3 my-2 rounded-md`,
         img: `flex justify-center items-center 
-          size-[4.5em] rounded-md `,
+            size-[4.5em] rounded-md `,
         loadingRectangle: ' bg-zinc-400 rounded-md animate-pulse',
         loadingButton: ' text-zinc-400 px-3 py-1 shadow-sombra text-xs',
     };
