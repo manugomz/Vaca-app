@@ -8,7 +8,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function Login() {
     const style = {
-        input: `w-full my-4 rounded-md border-slate-400 border-2 py-2 px-3`,
+        input: `w-full my-4 rounded-md border-slate-400 border-2 py-2 px-3 pr-5`,
         button: `w-full text-white bg-brown-p rounded-md py-2 text-center mt-2 `,
         buttonSecondary: `w-full text-brown-p border-brown-p border-2 rounded-md py-2 text-center mt-2 `,
     };
@@ -45,26 +45,40 @@ export default function Login() {
             <LogoDecoration width={240} />
             <form action="POST">
                 <h1 className="text-brown-p-light text-center text-xl py-5">Iniciar sesión</h1>
-                <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    className={style.input}
-                    placeholder="Correo electrónico"
-                    onChange={handleInputChange}
-                    autoFocus
-                    required
-                />
-                <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    className={style.input}
-                    placeholder="Contraseña"
-                    onChange={handleInputChange}
-                    autoFocus
-                    required
-                />
+                <div className="relative">
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        className={style.input}
+                        placeholder="Correo electrónico"
+                        onChange={handleInputChange}
+                        autoFocus
+                        required
+                    />
+                    <img
+                        src="../../src/assets/user.svg"
+                        alt="icon"
+                        className="absolute top-6 right-3"
+                    />
+                </div>
+                <div className="relative">
+                    <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        className={style.input}
+                        placeholder="Contraseña"
+                        onChange={handleInputChange}
+                        autoFocus
+                        required
+                    />
+                    <img
+                        src="../../src/assets/password.svg"
+                        alt="icon"
+                        className="absolute top-6 right-3"
+                    />
+                </div>
 
                 {errors?.map((error, i) => (
                     <p key={i}>{error}</p>
