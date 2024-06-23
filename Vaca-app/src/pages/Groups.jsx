@@ -9,7 +9,7 @@ import Modal from '../components/Modal';
 import ModalConfirmation from '../components/ModalConfirmation';
 import SingleGroup from '../components/SingleGroup';
 
-//TODO: Responsive for WEB (Buttons hover and click animations)
+//? TODO: Responsive for WEB (Buttons hover and click animations)
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -19,6 +19,7 @@ const Groups = () => {
         loadingRectangle: 'bg-zinc-400 rounded-md animate-pulse',
         loadingButton: ' text-zinc-400 px-3 py-1 shadow-sombra text-xs',
         button: `bg-brown-p text-white
+            min-w-20
             px-3 py-1
             shadow-sombra rounded-md 
             text-xs 
@@ -40,12 +41,12 @@ const Groups = () => {
     const total = -50_000;
 
     const deleteGroup = async (id) => {
-        try {
-            await deleteGroupMutation.mutate(null, id);
-            reFetch();
-        } catch {}
+        // try {
+        //     await deleteGroupMutation.mutate(null, id);
+        //     reFetch();
+        // } catch {}
     };
-
+    //*--------------------------------------------LOADER------------------------------------------------
     if (loading) {
         return (
             <main className={styles.container + ' animate-pulse bg-zinc-100'}>
@@ -86,6 +87,7 @@ const Groups = () => {
                 </div>
             </main>
         );
+        //*-------------------------------------------------------------------------------------------------
     } else if (error) {
         return (
             <div className="font-fredoka flex flex-col">
@@ -95,6 +97,7 @@ const Groups = () => {
                 </div>
             </div>
         );
+        //*-------------------------------------------GROUPS-------------------------------------------------
     } else if (groups) {
         return (
             <main className={styles.container}>
@@ -103,16 +106,6 @@ const Groups = () => {
                         reFetch={reFetch}
                         onClose={() => {
                             setModalOpen(false);
-                        }}
-                    />
-                )}
-                {modalConfirmOpen && (
-                    <ModalConfirmation
-                        id={currentId}
-                        onDelete={deleteGroup}
-                        onClose={() => {
-                            setCurrentId(0);
-                            setModalConfirmOpen(false);
                         }}
                     />
                 )}
@@ -159,7 +152,7 @@ const Groups = () => {
                                             navigate(`/grupos/${group.id}`);
                                         }}
                                     >
-                                        Editar
+                                        Ver
                                     </button>
 
                                     <button
@@ -169,12 +162,22 @@ const Groups = () => {
                                             setCurrentId(group.id);
                                         }}
                                     >
-                                        Eliminar
+                                        Abandonar
                                     </button>
                                 </div>
                             </SingleGroup>
                         );
                     })}
+                {modalConfirmOpen && (
+                    <ModalConfirmation
+                        id={currentId}
+                        onDelete={deleteGroup}
+                        onClose={() => {
+                            setCurrentId(0);
+                            setModalConfirmOpen(false);
+                        }}
+                    />
+                )}
             </main>
         );
     }
