@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useFetch from '../hooks/useFetch';
 import { useParams } from 'react-router-dom';
 
 import SingleGroup from '../components/SingleGroup';
+import EditGroupModal from '../components/EditGroupModal';
 
 export default function GroupDetails() {
     const styles = {
@@ -18,7 +19,14 @@ export default function GroupDetails() {
 
     const { id } = useParams();
 
-    const { data: singleGroup, loading, error } = useFetch('http://localhost:3000/groups/' + id);
+    const [modalEditOpen, setModalEditOpen] = useState(false);
+
+    const {
+        data: singleGroup,
+        loading,
+        error,
+        reFetch,
+    } = useFetch('http://localhost:3000/groups/' + id);
 
     const group = {
         total: 2000,
@@ -42,7 +50,9 @@ export default function GroupDetails() {
             <section className="flex justify-around pt-5 py">
                 <button className={styles.button}>Nuevo Gasto</button>
                 <button className={styles.button}>Nuevo Amigo</button>
-                <button className={styles.button}>Editar Grupo</button>
+                <button className={styles.button} onClick={() => setModalEditOpen(true)}>
+                    Editar Grupo
+                </button>
             </section>
 
             <SingleGroup group={singleGroup}>
@@ -90,6 +100,13 @@ export default function GroupDetails() {
                     );
                 })}
             </section>
+            {modalEditOpen && (
+                <EditGroupModal
+                    groupInfo={singleGroup}
+                    onClose={() => setModalEditOpen(false)}
+                    reFetch={reFetch}
+                />
+            )}
         </main>
     );
 }

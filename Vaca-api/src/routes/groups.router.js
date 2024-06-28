@@ -14,7 +14,7 @@ const GroupsRouter = () => {
     router.get('/:id', continuator(controller.getById));
     router.delete('/:id', continuator(controller.deleteById));
     router.post('/', validate({ body: schema }), continuator(controller.create));
-    router.put('/:id', continuator(controller.fullUpdateById));
+    router.put('/:id', validate({ body: schema }), continuator(controller.fullUpdateById));
 
     return router;
 };
