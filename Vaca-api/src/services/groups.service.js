@@ -20,7 +20,7 @@ const Service = (dbClient) => {
     };
 
     const fullUpdateById = async (group) => {
-        const name = groupValidations(group);
+        const name = group.name;
         const existingGroup = await repository.getById(group.id);
         //Validations with DB
         if (!existingGroup) {
@@ -43,34 +43,6 @@ const Service = (dbClient) => {
     const getById = async (id) => {
         return await repository.getById(id);
     };
-
-    function groupValidations(group) {
-        //Name Validations
-        const name = (group.name || '').trim();
-
-        if (name.length === 0) {
-            throw AppError('El nombre es requerido', 400);
-        }
-        if (name.length > 30) {
-            throw AppError('El nombre debe tener menos de 30 caracteres', 400);
-        }
-
-        //Color Validations
-        const color = (group.color || '').trim();
-
-        if (color.slice(0, 1) !== '#') {
-            throw AppError('El color debe estar en formato hex, incluyendo el #', 400);
-        }
-
-        if (color.length === 0) {
-            throw AppError('El color es requerido', 400);
-        }
-        if (color.length !== 4 && color.length !== 7) {
-            throw AppError('El color debe estar en formato hexadecimal', 400);
-        }
-
-        return name;
-    }
 
     return {
         create,
