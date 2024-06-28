@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import useMutation from '../hooks/useMutation';
 
 import Logo from '../components/Logo';
-import Modal from '../components/Modal';
+import CreateGroupModal from '../components/CreateGroupModal';
 import ModalConfirmation from '../components/ModalConfirmation';
 import SingleGroup from '../components/SingleGroup';
 
@@ -21,11 +21,11 @@ const Groups = () => {
         button: `bg-brown-p text-white
             min-w-20
             px-3 py-1
-            shadow-sombra rounded-md 
+            shadow-sombra rounded-md border-brown-p border-2
             text-xs 
-            hover:bg-brown-p-light
-            focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p
-            active:outline-none active:ring-brown-p`,
+            hover:bg-zinc-300 hover:text-brown-p
+            focus:bg-zinc-300 focus:ring-none focus:ring-brown-p focus:text-brown-p
+            active:outline-none active:bg-zinc-300 active:ring-brown-p`,
     };
 
     const [modalOpen, setModalOpen] = useState(false);
@@ -50,15 +50,7 @@ const Groups = () => {
     if (loading) {
         return (
             <main className={styles.container + ' animate-pulse bg-zinc-100'}>
-                <button
-                    className="bg-brown-p text-white 
-        px-3 py-1 w-1/3
-        rounded-md shadow-sombra text-sm
-        md:w-[20%]
-        self-end"
-                >
-                    Nuevo grupo
-                </button>
+                <button className={styles.button}>Nuevo grupo</button>
                 <div>
                     <div className={styles.loadingRectangle + ' w-1/6 h-5 mt-1'}></div>
                     <div className={styles.loadingRectangle + ' w-1/5 h-5 mt-1'}></div>
@@ -102,7 +94,7 @@ const Groups = () => {
         return (
             <main className={styles.container}>
                 {modalOpen && (
-                    <Modal
+                    <CreateGroupModal
                         reFetch={reFetch}
                         onClose={() => {
                             setModalOpen(false);

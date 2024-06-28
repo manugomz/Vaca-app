@@ -10,10 +10,10 @@ export default function GroupDetails() {
                 shadow-sombra
                 px-5 py-3 my-2 rounded-md`,
         button: `bg-brown-p rounded-md px-3 py-1
-    shadow-sombra
-    text-white text-xs 
-    hover:bg-zinc-300 
-    focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p`,
+                shadow-sombra
+                text-white text-xs 
+                hover:bg-zinc-300 
+                focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p`,
     };
 
     const { id } = useParams();
@@ -57,7 +57,7 @@ export default function GroupDetails() {
                     </p>
                 )}
                 <p className="text-xs">
-                    Participantes: <strong className="text-red-p">0</strong>
+                    Participantes: <strong style={{ color: singleGroup.color }}>8</strong>
                 </p>
                 <button className={styles.button + ' self-start mt-1'}>Eliminar grupo</button>
             </SingleGroup>
