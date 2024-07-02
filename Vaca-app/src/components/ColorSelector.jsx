@@ -6,7 +6,7 @@ const ColorSelector = ({ group, setGroup }) => {
     justify-items-center content-around 
     border-slate-400 border-2 rounded-md 
     p-2 `,
-        coloroButton: `h-12 w-12 cursor-pointer 
+        colorButton: `h-12 w-12 cursor-pointer 
     rounded-md border-slate-300 border-2
     focus:ring-0 
     active:border-sky-600`,
@@ -53,9 +53,9 @@ const ColorSelector = ({ group, setGroup }) => {
                             style={{ backgroundColor: color['hex'] }}
                             className={
                                 color.hex === group?.color
-                                    ? style.coloroButton +
+                                    ? style.colorButton +
                                       ' border-x-sky-500 border-y-sky-400 border-4'
-                                    : style.coloroButton
+                                    : style.colorButton
                             }
                             onClick={() => {
                                 setGroup({

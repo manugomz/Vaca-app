@@ -15,7 +15,7 @@ const Controller = () => {
                 .json({ error: 'Usuario y/o contraseña incorrectos' });
         }
 
-        const payload = { id: user.userid, date: Date.now(), email: user.email };
+        const payload = { id: user.userid, email: user.email, date: Date.now() };
 
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '2h' });
         res.json({ token });
