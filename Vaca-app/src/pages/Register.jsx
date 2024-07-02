@@ -7,7 +7,13 @@ import useMutation from '../hooks/useMutation';
 export default function Register() {
     const style = {
         input: `w-full my-4 rounded-md border-slate-400 border-2 py-2 px-3`,
-        button: `w-full text-white bg-brown-p rounded-md py-2 text-center mt-2 `,
+        button: `bg-brown-p rounded-md
+                w-full  py-2 mt-2 
+                shadow-sombra 
+                text-white  text-center 
+                hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
+                focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p
+                active:outline-none active:bg-zinc-300 active:ring-brown-p`,
     };
 
     const [newUser, setNewUser] = useState();

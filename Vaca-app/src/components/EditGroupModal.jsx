@@ -7,11 +7,13 @@ import Modal from './Modal';
 
 export default function EditGroupModal({ onClose, reFetch, groupInfo }) {
     const style = {
-        createButton: `text-white bg-brown-p rounded-md py-1 mt-1 text-center disabled:opacity-50`,
-        coloroButton: `h-12 w-12 cursor-pointer 
-                rounded-md border-slate-300 border-2
-                focus:ring-0  
-                active:border-sky-600`,
+        createButton: `bg-brown-p rounded-md 
+                px-3 py-1 mt-1
+                shadow-sombra
+                text-white text-xs text-center
+                hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
+                focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p disabled:opacity-50`,
+
         nameInput: `w-full my-2 pr-8 rounded-md border-slate-400 border-2 p-1 px-3`,
     };
 

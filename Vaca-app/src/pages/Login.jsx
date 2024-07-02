@@ -9,8 +9,19 @@ const apiUrl = import.meta.env.VITE_API_URL;
 export default function Login() {
     const style = {
         input: `w-full my-4 rounded-md border-slate-400 border-2 py-2 px-3 pr-5`,
-        button: `w-full text-white bg-brown-p rounded-md py-2 text-center mt-2 `,
-        buttonSecondary: `w-full text-brown-p border-brown-p border-2 rounded-md py-2 text-center mt-2 `,
+        button: `bg-brown-p rounded-md
+            w-full py-2 mt-2
+            text-white text-center  
+            hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
+            focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p
+            active:outline-none active:bg-zinc-300 active:ring-brown-p`,
+        buttonSecondary: 
+        `bg-white rounded-md 
+        w-full py-2 mt-2
+        text-brown-p text-center
+        border-brown-p border-2 
+        hover:bg-zinc-100 hover:ring-2 hover:ring-brown-p hover:border-zinc-100
+            focus:bg-zinc-300 focus:ring-2 focus:ring-white focus:border-brown-p`,
     };
 
     const [errors, setErrors] = useState([]);
@@ -33,7 +44,7 @@ export default function Login() {
         try {
             const token = await loginMutation.mutate(user);
             window.sessionStorage.setItem('token', token['token']);
-            window.sessionStorage.setItem('user', user.email);
+
             navigate(`/grupos`);
         } catch (error) {
             setErrors(error.message.split(','));

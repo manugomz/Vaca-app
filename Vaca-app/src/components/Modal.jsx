@@ -4,7 +4,7 @@ import { IoClose } from 'react-icons/io5';
 export default function Modal({ onClose, children, method }) {
     const style = {
         modal: `absolute
-                flex flex-col self-center gap-2 top-1/3
+                flex flex-col gap-2 top-1/3 left-1/4
                 mx-4 py-4 px-8 
                 w-80 z-10
                 bg-white rounded-md`,

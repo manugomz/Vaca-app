@@ -18,13 +18,12 @@ const Groups = () => {
         container: 'font-fredoka p-4 flex flex-col',
         loadingRectangle: 'bg-zinc-400 rounded-md animate-pulse',
         loadingButton: ' text-zinc-400 px-3 py-1 shadow-sombra text-xs',
-        button: `bg-brown-p text-white
-            min-w-20
-            px-3 py-1
-            shadow-sombra rounded-md border-brown-p border-2
-            text-xs 
-            hover:bg-zinc-300 hover:text-brown-p
-            focus:bg-zinc-300 focus:ring-none focus:ring-brown-p focus:text-brown-p
+        button: `bg-brown-p rounded-md
+            min-w-20 px-3 py-1
+            shadow-sombra 
+            text-white text-xs 
+            hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
+            focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p
             active:outline-none active:bg-zinc-300 active:ring-brown-p`,
     };
 
