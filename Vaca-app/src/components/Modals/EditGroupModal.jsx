@@ -1,35 +1,40 @@
 import React, { useState } from 'react';
 
-import useMutation from '../hooks/useMutation';
+import useMutation from '../../hooks/useMutation';
 
-import ColorSelector from './ColorSelector';
+import ColorSelector from '../ColorSelector';
 import Modal from './Modal';
 
-export default function CreateGroupModal({ onClose, reFetch }) {
+export default function EditGroupModal({ onClose, reFetch, groupInfo }) {
     const style = {
         createButton: `bg-brown-p rounded-md 
-                px-3 py-1 mt-2
+                px-3 py-1 mt-1
                 shadow-sombra
-                text-white text-xs 
+                text-white text-xs text-center
                 hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
                 focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p disabled:opacity-50`,
+
         nameInput: `w-full my-2 pr-8 rounded-md border-slate-400 border-2 p-1 px-3`,
     };
 
     const [errors, setErrors] = useState(null);
-    const [newGroup, setNewGroup] = useState({
+    const [group, setGroup] = useState({
         ownerUserId: 1,
-        name: '',
-        color: '#FFF',
+        name: groupInfo.name,
+        color: groupInfo.color,
     });
 
-    const createGroupMutation = useMutation('http://localhost:3000/groups/');
+    const updateGroupMutation = useMutation(
+        'http://localhost:3000/groups/' + groupInfo.id,
+        false,
+        'PUT',
+    );
 
     const handleInputChange = (event) => {
         setErrors(null);
         const { name, value } = event.target;
-        setNewGroup({
-            ...newGroup,
+        setGroup({
+            ...group,
             [name]: value,
         });
     };
@@ -37,7 +42,7 @@ export default function CreateGroupModal({ onClose, reFetch }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await createGroupMutation.mutate(newGroup);
+            await updateGroupMutation.mutate(group);
             onClose();
             reFetch();
         } catch (e) {
@@ -47,7 +52,7 @@ export default function CreateGroupModal({ onClose, reFetch }) {
 
     return (
         <Modal onClose={onClose} method="POST">
-            <fieldset className="flex flex-col items-center">
+            <fieldset className="flex flex-col">
                 <label htmlFor="name" className="text-center text-brown-p">
                     Nuevo Grupo
                 </label>
@@ -58,7 +63,7 @@ export default function CreateGroupModal({ onClose, reFetch }) {
                         type="text"
                         maxLength="30"
                         className={style.nameInput}
-                        value={newGroup.name}
+                        value={group.name}
                         onChange={handleInputChange}
                         autoFocus
                         required
@@ -71,17 +76,17 @@ export default function CreateGroupModal({ onClose, reFetch }) {
                     />
                 </div>
             </fieldset>
-            <ColorSelector group={newGroup} setGroup={setNewGroup} />
+            <ColorSelector group={group} setGroup={setGroup} />
             <button
                 type="submit"
                 className={style.createButton}
                 onClick={handleSubmit}
-                disabled={!!errors || !newGroup.name}
+                disabled={!!errors || !group.name}
             >
-                Crear
+                Actualizar
             </button>
 
-            <div className="text-red-p text-sm text-center h-[34px]">
+            <div className="text-red-p text-xs text-center h-[32px]">
                 {errors?.map((error, i) => (
                     <p key={i}>{error}</p>
                 ))}

@@ -3,7 +3,7 @@
 const CREATE = `INSERT INTO groups (name,color, ownerUserId) 
                 VALUES ($1,$2,$3) 
                 RETURNING id, name, color, ownerUserId`;
-const GET_ALL = `SELECT * FROM groups ORDER BY createdate desc`;
+const GET_ALL = `SELECT * FROM groups WHERE ownerUserId= $1 ORDER BY createdate desc`;
 const GET_BY_ID = `SELECT * FROM groups WHERE id = $1`;
 const DELETE_BY_ID = `DELETE FROM groups WHERE id = $1`;
 
@@ -24,8 +24,8 @@ export const Repository = (dbClient) => {
         return result.rowCount > 0;
     };
 
-    const getAll = async () => {
-        const result = await dbClient.query(GET_ALL);
+    const getAll = async (ownerUserId) => {
+        const result = await dbClient.query(GET_ALL, [ownerUserId]);
         return result.rows;
     };
 

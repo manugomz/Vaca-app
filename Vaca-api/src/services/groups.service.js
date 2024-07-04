@@ -36,8 +36,8 @@ const Service = (dbClient) => {
         });
     };
 
-    const getAll = async () => {
-        return await repository.getAll();
+    const getAll = async (ownerUserId) => {
+        return await repository.getAll(ownerUserId);
     };
 
     const getById = async (id) => {

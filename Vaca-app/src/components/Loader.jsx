@@ -8,15 +8,18 @@ const Loader = () => {
                 className="fixed top-0 left-0
                     flex flex-col justify-center items-center
                     h-full w-full
-                    bg-brown-p font-fredoka"
+                    bg-brown-p font-fredoka
+                    "
             >
                 <Logo w="150" h="150" />
                 <h1 className="text-white text-5xl">Mi Vaquita</h1>
                 <p className="text-amber-300">Comparte gastos con tus amigos</p>
-
+                <p className="text-white text-2xl pt-10 hidden xl:inline xl:animate-pulse">
+                    Cargando...
+                </p>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-80 fixed bottom-0 left-0 w-[550%] animate-wave1"
+                    className="h-80 fixed bottom-0 left-0 w-[550%] animate-wave1 xl:hidden"
                 >
                     <path
                         d="m101.22,144.55c36.64,27.64 59.03,47.59 91.41,38.18c32.38,-9.4 36.94,-22.77 73.86,
@@ -34,7 +37,7 @@ const Loader = () => {
                 </svg>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className=" h-64 fixed bottom-0 left-0 w-[550%] animate-wave2"
+                    className=" h-64 fixed bottom-0 left-0 w-[550%] animate-wave2 xl:hidden"
                 >
                     <path
                         d="m101.22,144.55c36.64,27.64 59.03,47.59 91.41,38.18c32.38,-9.4 36.94,-22.77 73.86,
@@ -52,7 +55,7 @@ const Loader = () => {
                 </svg>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className=" h-72 fixed bottom-0 left-0 w-[550%] animate-wave3"
+                    className=" h-72 fixed bottom-0 left-0 w-[550%] animate-wave3 xl:hidden"
                 >
                     <path
                         d="m101.22,144.55c36.64,27.64 59.03,47.59 91.41,38.18c32.38,-9.4 36.94,-22.77 73.86,

@@ -23,7 +23,7 @@ export default function ModalConfirmation({ onClose, onDelete, id }) {
                     w-full h-full 
                     bg-[rgb(0,0,0,0.5)]
                     font-fredoka`,
-        modal: `flex flex-col self-center justify-self-center
+        modal: `flex flex-col self-center 
                 py-4 px-8 gap-3
                 w-80
                 bg-white rounded-md

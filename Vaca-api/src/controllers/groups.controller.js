@@ -4,7 +4,8 @@ import { StatusCodes } from 'http-status-codes';
 const Controller = () => {
     const create = async (req, res) => {
         const service = Service(req.dbClient);
-        const group = req.body;
+        const ownerUserId = req.user?.userid;
+        const group = { ...req.body, ownerUserId };
         const createdGroup = await service.create(group);
         res.status(StatusCodes.CREATED).json(createdGroup);
     };
@@ -35,7 +36,7 @@ const Controller = () => {
 
     const getAll = async (req, res) => {
         const service = Service(req.dbClient);
-        const groups = await service.getAll();
+        const groups = await service.getAll(req.user?.userid);
 
         res.status(StatusCodes.OK).json(groups);
     };

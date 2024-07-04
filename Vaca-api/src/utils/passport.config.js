@@ -12,7 +12,9 @@ passport.use(
     new Strategy(options, async function (req, jwtPayload, done) {
         try {
             const user = await Service(req.dbClient).getByEmail(jwtPayload.email);
+
             if (user) {
+                req.user = user;
                 return done(null, user);
             } else {
                 return done(null, false);

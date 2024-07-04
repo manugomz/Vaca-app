@@ -18,7 +18,7 @@ const Controller = () => {
         const payload = { id: user.userid, email: user.email, date: Date.now() };
 
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '2h' });
-        res.json({ token });
+        res.json({ token, user });
     };
     const check = async (_req, res) => {
         res.send('you are authenticated');

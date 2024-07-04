@@ -1,5 +1,5 @@
-import { Suspense, lazy } from 'react';
-import { Routes, Route, redirect } from 'react-router-dom';
+import { Suspense, lazy, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 
 import './App.css';
@@ -12,18 +12,9 @@ import GroupDetails from './pages/GroupDetails';
 import Loader from './components/Loader';
 import ProtectedRoute from './components/ProtectedRoute';
 import Register from './pages/Register';
+import { registerAxiosInterceptors } from './interceptors/HttpInterceptor';
 
-axios.get(`http://localhost:3000/auth/check`, {
-    headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }, //* NOT WORKING PROPERLY
-});
-//     .then((data) => {
-//         console.log(data);
-//         if (data.response.status === 401) {
-//             sessionStorage.removeItem('token');
-//         }
-//     });
 
-//const Login = lazy(() => import("./pages/Login")); //no timer
 const Login = lazy(() => {
     return new Promise((resolve) => {
         setTimeout(() => resolve(import('./pages/Login')), 1000);
@@ -31,6 +22,9 @@ const Login = lazy(() => {
 });
 
 function App() {
+    useEffect(() => {
+        registerAxiosInterceptors();
+    }, []);
     return (
         <>
             <Suspense fallback={<Loader />}>

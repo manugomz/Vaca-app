@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from './Logo';
 import { IoPersonCircleSharp } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
     return (
@@ -11,7 +11,10 @@ const Header = () => {
                     <Logo />
                     <h1 className="text-xl ml-2 md:text-3xl">Mi Vaquita</h1>
                 </div>
-                <IoPersonCircleSharp className="text-4xl md:hidden" />
+                <IoPersonCircleSharp className="text-4xl md:hidden" onClick={()=>{}} />
+                {
+                    //TODO: ADD USERINFO OPTION
+                }
             </div>
             <nav>
                 <ul className="flex justify-between py-3 text-lg">

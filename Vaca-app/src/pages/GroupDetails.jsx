@@ -3,23 +3,26 @@ import useFetch from '../hooks/useFetch';
 import { useParams } from 'react-router-dom';
 
 import SingleGroup from '../components/SingleGroup';
-import EditGroupModal from '../components/EditGroupModal';
+import EditGroupModal from '../components/Modals/EditGroupModal';
+import DeleteGroupModal from '../components/Modals/DeleteGroupModal';
 
 export default function GroupDetails() {
     const styles = {
         container: `justify-around items-center
                 shadow-sombra
                 px-5 py-3 my-2 rounded-md`,
-        button: `bg-brown-p rounded-md px-3 py-1
+        button: `bg-brown-p rounded-md 
+                px-3 py-1
                 shadow-sombra
-                text-white text-xs 
-                hover:bg-zinc-300 
+                text-white text-xs
+                hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
                 focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p`,
     };
 
     const { id } = useParams();
 
     const [modalEditOpen, setModalEditOpen] = useState(false);
+    const [modalDeleteOpen, setModalDeleteOpen] = useState(false);
 
     const {
         data: singleGroup,
@@ -69,7 +72,12 @@ export default function GroupDetails() {
                 <p className="text-xs">
                     Participantes: <strong style={{ color: singleGroup.color }}>8</strong>
                 </p>
-                <button className={styles.button + ' self-start mt-1'}>Eliminar grupo</button>
+                <button
+                    className={styles.button + ' self-start mt-1'}
+                    onClick={() => setModalDeleteOpen(true)}
+                >
+                    Eliminar grupo
+                </button>
             </SingleGroup>
 
             <h2 className=" text-amber-400 text-lg">GASTOS</h2>
@@ -104,6 +112,13 @@ export default function GroupDetails() {
                 <EditGroupModal
                     groupInfo={singleGroup}
                     onClose={() => setModalEditOpen(false)}
+                    reFetch={reFetch}
+                />
+            )}
+            {modalDeleteOpen && (
+                <DeleteGroupModal
+                    groupInfo={singleGroup}
+                    onClose={() => setModalDeleteOpen(false)}
                     reFetch={reFetch}
                 />
             )}
