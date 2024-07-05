@@ -11,7 +11,6 @@ const AuthRouter = () => {
     router.post('/login', continuator(controller.login));
     router.get(
         '/check',
-        passport.authenticate('jwt', { session: false }),
         continuator(controller.check),
     );
 

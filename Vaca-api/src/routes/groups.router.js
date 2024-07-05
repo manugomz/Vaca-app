@@ -11,19 +11,10 @@ const GroupsRouter = () => {
     const controller = Controller();
 
     // configuracion de rutas
-    router.get(
-        '/',
-        passport.authenticate('jwt', { session: false }),
-        continuator(controller.getAll),
-    );
+    router.get('/', continuator(controller.getAll));
     router.get('/:id', continuator(controller.getById));
     router.delete('/:id', continuator(controller.deleteById));
-    router.post(
-        '/',
-        passport.authenticate('jwt', { session: false }),
-        validate({ body: schema }),
-        continuator(controller.create),
-    );
+    router.post('/', validate({ body: schema }), continuator(controller.create));
     router.put('/:id', validate({ body: schema }), continuator(controller.fullUpdateById));
 
     return router;

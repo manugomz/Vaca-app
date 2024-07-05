@@ -6,6 +6,7 @@ import passport from 'passport';
 
 import mainRouter from './routes/async.router.js';
 import { connectDatabase, commitDatabase, rollbackDatabase } from './lib/database.middleware.js';
+import { applyJWTAuthentication } from './lib/auth.middleware.js';
 
 import './utils/passport.config.js';
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(cors());
 app.use(connectDatabase);
 app.use(passport.initialize());
+app.use(applyJWTAuthentication);
 app.use(mainRouter());
 app.use(commitDatabase);
 app.use(rollbackDatabase);
