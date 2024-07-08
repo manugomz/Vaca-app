@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import SingleGroup from '../components/SingleGroup';
 import EditGroupModal from '../components/Modals/EditGroupModal';
 import DeleteGroupModal from '../components/Modals/DeleteGroupModal';
+import AddFriendToGroup from '../components/Modals/AddFriendToGroupModal';
 
 export default function GroupDetails() {
     const styles = {
@@ -15,6 +16,7 @@ export default function GroupDetails() {
                 px-3 py-1
                 shadow-sombra
                 text-white text-xs
+                md:text-base
                 hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
                 focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p`,
     };
@@ -23,6 +25,7 @@ export default function GroupDetails() {
 
     const [modalEditOpen, setModalEditOpen] = useState(false);
     const [modalDeleteOpen, setModalDeleteOpen] = useState(false);
+    const [modalAddFriendOpen, setModalAddFriendOpen] = useState(false);
 
     const {
         data: singleGroup,
@@ -30,6 +33,13 @@ export default function GroupDetails() {
         error,
         reFetch,
     } = useFetch('http://localhost:3000/groups/' + id);
+
+    const {
+        data: usersGroup,
+        loading: loadingUsersGroup,
+        error: errorUsersGroup,
+        reFetch: reFetchUsersGroup,
+    } = useFetch('http://localhost:3000/usersgroup/' + id);
 
     const group = {
         total: 2000,
@@ -52,7 +62,9 @@ export default function GroupDetails() {
         <main className="font-fredoka px-4">
             <section className="flex justify-around pt-5 py">
                 <button className={styles.button}>Nuevo Gasto</button>
-                <button className={styles.button}>Nuevo Amigo</button>
+                <button className={styles.button} onClick={() => setModalAddFriendOpen(true)}>
+                    Nuevo Amigo
+                </button>
                 <button className={styles.button} onClick={() => setModalEditOpen(true)}>
                     Editar Grupo
                 </button>
@@ -70,7 +82,8 @@ export default function GroupDetails() {
                     </p>
                 )}
                 <p className="text-xs">
-                    Participantes: <strong style={{ color: singleGroup.color }}>8</strong>
+                    Participantes:{' '}
+                    <strong style={{ color: singleGroup.color }}>{usersGroup.length}</strong>
                 </p>
                 <button
                     className={styles.button + ' self-start mt-1'}
@@ -119,6 +132,12 @@ export default function GroupDetails() {
                 <DeleteGroupModal
                     groupInfo={singleGroup}
                     onClose={() => setModalDeleteOpen(false)}
+                    reFetch={reFetch}
+                />
+            )}{modalAddFriendOpen && (
+                <AddFriendToGroup
+                    groupId={id}
+                    onClose={() => setModalAddFriendOpen(false)}
                     reFetch={reFetch}
                 />
             )}

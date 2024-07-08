@@ -4,6 +4,8 @@ import { useNavigate, Navigate } from 'react-router-dom';
 import LogoDecoration from '../assets/LogoDecoration.svg?react';
 import useMutation from '../hooks/useMutation';
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default function Register() {
     const style = {
         input: `w-full my-4 rounded-md border-slate-400 border-2 py-2 px-3`,
@@ -20,7 +22,8 @@ export default function Register() {
     const [errorMessages, setErrorMessages] = useState([]);
     const navigate = useNavigate();
 
-    const createUserMutation = useMutation('http://localhost:3000/users/');
+    const createUserMutation = useMutation(`${apiUrl}/users/`);
+    const loginMutation = useMutation(`${apiUrl}/auth/login`, true);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -36,10 +39,14 @@ export default function Register() {
 
         try {
             await createUserMutation.mutate(newUser);
+
             if (createUserMutation.error) {
                 setErrorMessages(createUserMutation.error);
             } else {
-                <Navigate to="/grupos" replace />;
+                const info = await loginMutation.mutate(newUser);
+                window.sessionStorage.setItem('token', info['token']);
+                window.sessionStorage.setItem('user', JSON.stringify(info['user']));
+                navigate(`/`);
             }
         } catch (e) {
             setErrorMessages(e.message.split(','));

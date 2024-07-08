@@ -13,12 +13,13 @@ const apiUrl = import.meta.env.VITE_API_URL;
 const Groups = () => {
     const styles = {
         container: 'font-fredoka p-4 flex flex-col md:px-16 lg:px-24',
-        loadingRectangle: 'bg-zinc-400 rounded-md animate-pulse',
-        loadingButton: 'bg-zinc-400 rounded-md text-white px-3 py-1 shadow-sombra text-xs',
+        loadingRectangle: 'bg-zinc-200 rounded-md animate-pulse',
+        loadingButton: 'bg-zinc-300 rounded-md text-white px-3 py-1 shadow-sombra text-xs',
         button: `bg-brown-p rounded-md
             min-w-20 px-3 py-1 max-w-40
             shadow-sombra 
             text-white text-xs 
+            md:text-base
             hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
             focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p
             active:outline-none active:bg-zinc-300 active:ring-brown-p
@@ -47,13 +48,17 @@ const Groups = () => {
     if (loading) {
         return (
             <main className={styles.container + ' animate-pulse'}>
-                <div className="w-full flex justify-between md:my-[4vh] px-5">
+                <div
+                    className="flex justify-end items-center
+                    w-full
+                    md:justify-between md:my-[4vh]"
+                >
                     <p className="text-4xl hidden md:inline">GRUPOS</p>
                     <button className={styles.button + ' opacity-50 self-end'}>Nuevo grupo</button>
                 </div>
                 <div className="md:my-[3vh]">
-                    <div className={styles.loadingRectangle + ' w-1/12 h-5 mt-1'}></div>
                     <div className={styles.loadingRectangle + ' w-1/6 h-5 mt-1'}></div>
+                    <div className={styles.loadingRectangle + ' w-1/5 h-5 mt-1'}></div>
                 </div>
                 <div
                     className="w-full flex flex-col 
@@ -62,7 +67,7 @@ const Groups = () => {
                                 lg:grid-cols-3
                                 xl:grid-cols-4"
                 >
-                    <SingleGroup loading={loading} group={{ name: ' ', color: '#a1a1aa' }}>
+                    <SingleGroup loading={loading} group={{ name: ' ', color: 'rgb(228 228 231)' }}>
                         <div className={styles.loadingRectangle + ' w-4/6 h-5 my-2'}></div>
                         <div className={styles.loadingRectangle + ' w-4/6 h-5 mb-2'}></div>
                         <div className="flex gap-3 pt-1">
@@ -79,7 +84,11 @@ const Groups = () => {
             <div className="font-fredoka flex flex-col">
                 <div className="text-3xl text-center pt-2">Oops! there was an error</div>
                 <div className="text-zinc-600 text-xs text-center pt-2 w-2/3 self-center">
-                    {error}
+                    {error === 'Request failed with status code 401' ? (
+                        navigate(`/login`)
+                    ) : (
+                        <p>{error}</p>
+                    )}
                 </div>
             </div>
         );
@@ -87,7 +96,11 @@ const Groups = () => {
     } else if (groups) {
         return (
             <main className={styles.container}>
-                <div className="w-full flex justify-between md:my-[4vh] items-center">
+                <div
+                    className="flex justify-end items-center
+                    w-full
+                    md:justify-between md:my-[4vh]"
+                >
                     <h2 className="text-4xl hidden md:inline">GRUPOS</h2>
                     <button
                         data-modal-target="crud-modal"
@@ -136,9 +149,9 @@ const Groups = () => {
                                                 Participantes:
                                                 <strong
                                                     style={{ color: group.color }}
-                                                    className="w-full"
+                                                    className="w-full pl-1"
                                                 >
-                                                    {`${7} miembros`}
+                                                    {` ${7} miembros`}
                                                 </strong>
                                             </p>
                                         </>

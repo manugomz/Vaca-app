@@ -12,6 +12,7 @@ export default function DeleteGroupModal({ onClose, groupInfo }) {
                 w-1/3 px-3 py-1 my-2
                 shadow-sombra
                 text-white text-xs 
+                md:text-base
                 hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
                 focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p`,
         modalBackground: `fixed left-0 top-0 

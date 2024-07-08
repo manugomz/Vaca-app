@@ -11,6 +11,7 @@ export default function CreateGroupModal({ onClose, reFetch }) {
                 px-3 py-1 mt-2
                 shadow-sombra
                 text-white text-xs 
+                md:text-base
                 hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
                 focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p disabled:opacity-50`,
         nameInput: `w-full my-2 pr-8 rounded-md border-slate-400 border-2 p-1 px-3`,

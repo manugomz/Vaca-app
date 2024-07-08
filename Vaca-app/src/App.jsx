@@ -8,12 +8,13 @@ import Expenses from './pages/Expenses';
 import Friends from './pages/Friends';
 import Groups from './pages/Groups';
 import GroupDetails from './pages/GroupDetails';
+import Home from './pages/Home';
+import Register from './pages/Register';
 
 import Loader from './components/Loader';
 import ProtectedRoute from './components/ProtectedRoute';
-import Register from './pages/Register';
-import { registerAxiosInterceptors } from './interceptors/HttpInterceptor';
 
+import { registerAxiosInterceptors } from './interceptors/HttpInterceptor';
 
 const Login = lazy(() => {
     return new Promise((resolve) => {
@@ -29,13 +30,14 @@ function App() {
         <>
             <Suspense fallback={<Loader />}>
                 <Routes>
-                    <Route path="/amigos" element={<ProtectedRoute Component={Friends} />} />
                     <Route path="/gastos" element={<ProtectedRoute Component={Expenses} />} />
+                    <Route path="/amigos" element={<ProtectedRoute Component={Friends} />} />
                     <Route path="/grupos" element={<ProtectedRoute Component={Groups} />} />
                     <Route
                         path="/grupos/:id"
                         element={<ProtectedRoute Component={GroupDetails} />}
                     />
+                    <Route path="/" element={<ProtectedRoute Component={Home} />} />
                     <Route path="/registro" element={<Register />} />
                     <Route path="/login" element={<Login />} />
                 </Routes>

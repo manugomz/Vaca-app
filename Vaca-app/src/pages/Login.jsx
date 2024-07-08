@@ -43,8 +43,8 @@ export default function Login() {
         try {
             const info = await loginMutation.mutate(user);
             window.sessionStorage.setItem('token', info['token']);
-
-            navigate(`/grupos`);
+            window.sessionStorage.setItem('user', JSON.stringify(info['user']));
+            navigate(`/`);
         } catch (error) {
             setErrors(error.message.split(','));
         }

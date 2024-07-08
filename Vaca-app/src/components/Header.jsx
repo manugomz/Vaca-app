@@ -1,37 +1,46 @@
 import React from 'react';
 import Logo from './Logo';
 import { IoPersonCircleSharp } from 'react-icons/io5';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
+    const styles = {
+        headerContainer: `bg-brown-p
+                        font-fredoka text-white 
+                        py-3 px-5 
+                        md:flex md:justify-between md:items-center`,
+        li: `border-white rounded-sm 
+            md:hover:border-b-4 md:text-xl 
+            lg:hover`,
+        navigation: `flex justify-evenly 
+                    py-3 
+                    text-lg 
+                    md:w-full md:justify-between`,
+        title: 'text-xl ml-2 md:text-3xl',
+    };
+
     return (
-        <div className="font-fredoka bg-brown-p text-white py-3 px-5 md:flex md: justify-between">
+        <div className={styles.headerContainer}>
             <div className="flex justify-between">
                 <div className="flex items-baseline">
                     <Logo />
-                    <h1 className="text-xl ml-2 md:text-3xl">Mi Vaquita</h1>
+                    <h1 className={styles.title}>Mi Vaquita</h1>
                 </div>
-                <IoPersonCircleSharp className="text-4xl md:hidden" onClick={()=>{}} />
+                <IoPersonCircleSharp className="text-4xl md:hidden" onClick={() => {}} />
                 {
                     //TODO: ADD USERINFO OPTION
                 }
             </div>
-            <nav>
-                <ul className="flex justify-between py-3 text-lg">
-                    <li className="hover:border-b-1 border-white rounded-sm">
-                        <Link className="p-2" to="/amigos">
-                            Amigos
-                        </Link>
+            <nav className="md:w-5/12 lg:w-1/3">
+                <ul className={styles.navigation}>
+                    <li className={styles.li}>
+                        <Link to="/amigos">Amigos</Link>
                     </li>
-                    <li className="hover:border-b-1 border-white rounded-sm">
-                        <Link className="p-2" to="/gastos">
-                            Gastos
-                        </Link>
+                    <li className={styles.li}>
+                        <Link to="/gastos">Gastos</Link>
                     </li>
-                    <li className="hover:border-b-1 border-white rounded-sm">
-                        <Link className="p-2" to="/grupos">
-                            Grupos
-                        </Link>
+                    <li className={styles.li}>
+                        <Link to="/grupos">Grupos</Link>
                     </li>
                 </ul>
             </nav>

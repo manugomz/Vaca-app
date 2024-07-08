@@ -11,6 +11,7 @@ export default function EditGroupModal({ onClose, reFetch, groupInfo }) {
                 px-3 py-1 mt-1
                 shadow-sombra
                 text-white text-xs text-center
+                md:text-xl
                 hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
                 focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p disabled:opacity-50`,
 

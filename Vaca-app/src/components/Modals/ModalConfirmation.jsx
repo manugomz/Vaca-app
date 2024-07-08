@@ -1,20 +1,20 @@
 import React from 'react';
 import { IoClose, IoAlertCircle } from 'react-icons/io5';
 
-//TODO change message when send form and check radio buttons
-
 export default function ModalConfirmation({ onClose, onDelete, id }) {
     const style = {
         buttonNo: `bg-brown-p rounded-md 
             w-1/3 mt-2 py-1 
             shadow-sombra
             text-white
+            md:text-xl
             hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
             focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p`,
         buttonYes: `bg-white rounded-md 
             w-1/3 mt-2 py-1 
             text-brown-p
             border-brown-p border-2
+            md:text-xl
             hover:bg-zinc-100 hover:ring-2 hover:ring-brown-p hover:border-zinc-100
             focus:bg-zinc-300 focus:ring-2 focus:ring-white focus:border-brown-p`,
 
