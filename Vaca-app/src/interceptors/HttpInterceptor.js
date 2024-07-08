@@ -6,8 +6,8 @@ const pathsToBypassAuthentication = [
         method: 'post',
     },
     {
-        path: '/users',
-        method: 'post',
+        path: '/users/',
+        method: 'POST',
     },
 ];
 

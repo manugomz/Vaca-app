@@ -6,7 +6,7 @@ const pathsToBypassAuthentication = [
         method: 'POST',
     },
     {
-        path: '/users',
+        path: '/users/',
         method: 'POST',
     },
 ];
@@ -16,7 +16,7 @@ const authenticateJWT = passport.authenticate('jwt', { session: false });
 export function applyJWTAuthentication(req, res, next) {
     if (
         pathsToBypassAuthentication.some(
-            (element) => element.path === req.path && element.method === req.method,
+            (element) => element.path === req.url && element.method === req.method,
         )
     ) {
         return next();
