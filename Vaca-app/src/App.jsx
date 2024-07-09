@@ -15,6 +15,7 @@ import Loader from './components/Loader';
 import ProtectedRoute from './components/ProtectedRoute';
 
 import { registerAxiosInterceptors } from './interceptors/HttpInterceptor';
+import UserInformation from './pages/UserInformaiton';
 
 const Login = lazy(() => {
     return new Promise((resolve) => {
@@ -40,6 +41,10 @@ function App() {
                     <Route path="/" element={<ProtectedRoute Component={Home} />} />
                     <Route path="/registro" element={<Register />} />
                     <Route path="/login" element={<Login />} />
+                    <Route
+                        path="/user-info"
+                        element={<ProtectedRoute Component={UserInformation} />}
+                    />
                 </Routes>
             </Suspense>
         </>
