@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import useFetch from '../hooks/useFetch';
+
 import { useParams } from 'react-router-dom';
 
 import SingleGroup from '../components/SingleGroup';
 import EditGroupModal from '../components/Modals/EditGroupModal';
 import DeleteGroupModal from '../components/Modals/DeleteGroupModal';
 import AddFriendToGroup from '../components/Modals/AddFriendToGroupModal';
+
+import useFetch from '../hooks/useFetch';
+import useMutation from '../hooks/useMutation';
 
 export default function GroupDetails() {
     const styles = {
@@ -21,25 +24,24 @@ export default function GroupDetails() {
                 focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p`,
     };
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+
     const { id } = useParams();
 
     const [modalEditOpen, setModalEditOpen] = useState(false);
     const [modalDeleteOpen, setModalDeleteOpen] = useState(false);
     const [modalAddFriendOpen, setModalAddFriendOpen] = useState(false);
 
-    const {
-        data: singleGroup,
-        loading,
-        error,
-        reFetch,
-    } = useFetch('http://localhost:3000/groups/' + id);
+    const deleteGroupMutation = useMutation(`${apiUrl}/groups/`, false, 'DELETE');
+
+    const { data: singleGroup, loading, error, reFetch } = useFetch(`${apiUrl}/groups/` + id);
 
     const {
         data: usersGroup,
         loading: loadingUsersGroup,
         error: errorUsersGroup,
         reFetch: reFetchUsersGroup,
-    } = useFetch('http://localhost:3000/usersgroup/' + id);
+    } = useFetch(`${apiUrl}/usersgroup/` + id);
 
     const group = {
         total: 2000,
@@ -56,6 +58,13 @@ export default function GroupDetails() {
             },
             { name: 'Fiesta', total: 120000, participation: 'owe', members: 8, whoPaid: 'Lili' },
         ],
+    };
+
+    const deleteGroup = async (id) => {
+        try {
+            await deleteGroupMutation.mutate(null, id);
+            reFetch();
+        } catch {}
     };
 
     return (
@@ -134,7 +143,8 @@ export default function GroupDetails() {
                     onClose={() => setModalDeleteOpen(false)}
                     reFetch={reFetch}
                 />
-            )}{modalAddFriendOpen && (
+            )}
+            {modalAddFriendOpen && (
                 <AddFriendToGroup
                     groupId={id}
                     onClose={() => setModalAddFriendOpen(false)}
