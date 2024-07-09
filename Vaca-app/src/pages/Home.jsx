@@ -3,7 +3,7 @@ import Logo from '../components/Logo';
 
 export default function Home() {
     const styles = {
-        container:  `flex flex-col 
+        container: `flex flex-col 
                     w-full h-full items-center justify-center pt-20 
                     font-fredoka p-4 
                     md:flex-row md:gap-10
@@ -29,10 +29,10 @@ export default function Home() {
     const user = JSON.parse(window.sessionStorage.user);
 
     return (
-        <main className={styles.container }>
+        <main className={styles.container}>
             <Logo h="180" w="230" />
             <div>
-                <p className="text-2xl md:text-3xl text-center pt-5">¡Bienvenida {user.name}!</p>
+                <p className="text-2xl md:text-3xl text-center pt-5">¡Bienvenidx {user.name}!</p>
                 <p className="md:text-xl text-center">¿qué deseas hacer hoy?</p>
             </div>
         </main>

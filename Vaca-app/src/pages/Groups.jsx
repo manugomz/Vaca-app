@@ -12,18 +12,23 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 const Groups = () => {
     const styles = {
+        button: `bg-brown-p rounded-md
+        min-w-20 px-3 py-1 max-w-40
+        shadow-sombra 
+        text-white text-xs 
+        md:text-base
+        hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
+        focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p
+        active:outline-none active:bg-zinc-300 active:ring-brown-p
+        md:py-2`,
         container: 'font-fredoka p-4 flex flex-col md:px-16 lg:px-24',
+        groupsContainer: `w-full flex flex-col 
+                                md:grid md:grid-cols-2 md:justify-around 
+                                md:px-3
+                                lg:grid-cols-3
+                                xl:grid-cols-4`,
         loadingRectangle: 'bg-zinc-200 rounded-md animate-pulse',
         loadingButton: 'bg-zinc-300 rounded-md text-white px-3 py-1 shadow-sombra text-xs',
-        button: `bg-brown-p rounded-md
-            min-w-20 px-3 py-1 max-w-40
-            shadow-sombra 
-            text-white text-xs 
-            md:text-base
-            hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
-            focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p
-            active:outline-none active:bg-zinc-300 active:ring-brown-p
-            md:py-2`,
     };
 
     const [modalCreateOpen, setModalCreateOpen] = useState(false);
@@ -34,16 +39,8 @@ const Groups = () => {
 
     const { data: groups, loading, error, reFetch } = useFetch(`${apiUrl}/groups/`);
 
-    const deleteGroupMutation = useMutation(`${apiUrl}/groups/`, false, 'DELETE');
-
     const total = -50_000;
 
-    const deleteGroup = async (id) => {
-        // try {
-        //     await deleteGroupMutation.mutate(null, id);
-        //     reFetch();
-        // } catch {}
-    };
     //*--------------------------------------------LOADER------------------------------------------------
     if (loading) {
         return (
@@ -60,13 +57,7 @@ const Groups = () => {
                     <div className={styles.loadingRectangle + ' w-1/6 h-5 mt-1'}></div>
                     <div className={styles.loadingRectangle + ' w-1/5 h-5 mt-1'}></div>
                 </div>
-                <div
-                    className="w-full flex flex-col 
-                                md:grid md:grid-cols-2 md:justify-around 
-                                md:px-3
-                                lg:grid-cols-3
-                                xl:grid-cols-4"
-                >
+                <div className={styles.groupsContainer}>
                     <SingleGroup loading={loading} group={{ name: ' ', color: 'rgb(228 228 231)' }}>
                         <div className={styles.loadingRectangle + ' w-4/6 h-5 my-2'}></div>
                         <div className={styles.loadingRectangle + ' w-4/6 h-5 mb-2'}></div>
@@ -116,12 +107,7 @@ const Groups = () => {
                     <p className="">Debes</p>
                     <p className="text-red-p text-xl">$45.000</p>
                 </div>
-                <div
-                    className="w-full flex flex-col 
-                                md:grid md:grid-cols-2 md:justify-around 
-                                md:px-3
-                                xl:grid-cols-3"
-                >
+                <div className={styles.groupsContainer}>
                     {groups &&
                         groups.map((group) => {
                             return (

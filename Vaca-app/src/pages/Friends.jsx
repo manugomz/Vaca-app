@@ -10,17 +10,17 @@ const Friends = () => {
         friendsContainer: `flex justify-around items-center
                 shadow-sombra
                 p-3 my-2 rounded-md
-                md:pt-0 md:m-5
+                md:m-5
                 md:flex-col md:w-72`,
-        button: `bg-brown-p rounded-md self-end
-            min-w-20 px-3 py-1 md:w-1/4
-            shadow-sombra 
-            text-white text-xs 
-            md:text-base
-            hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
-            focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p
-            active:outline-none active:bg-zinc-300 active:ring-brown-p
-            md:py-2`,
+        button: `bg-brown-p rounded-md
+                min-w-20 px-3 py-1 max-w-40
+                shadow-sombra 
+                text-white text-xs 
+                md:text-base
+                hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
+                focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p
+                active:outline-none active:bg-zinc-300 active:ring-brown-p
+                md:py-2`,
         img: `flex justify-center items-center
             size-[4.5em] rounded-md `,
         loadingRectangle: 'bg-zinc-200 rounded-md animate-pulse',
@@ -65,7 +65,7 @@ const Friends = () => {
                             <div className={styles.img + 'bg-zinc-300'}>
                                 <Logo bg="transparent" h="50" w="55" />
                             </div>
-                            <div className={styles.loadingRectangle + " ml-5 w-40 h-6 mt-1"}></div>
+                            <div className={styles.loadingRectangle + ' ml-5 w-40 h-6 mt-1'}></div>
                         </div>
                         <div className="w-3/5 flex flex-col justify-between md:w-5/6"></div>
                     </div>
@@ -78,7 +78,7 @@ const Friends = () => {
                             <div className={styles.img + 'bg-zinc-300'}>
                                 <Logo bg="transparent" h="50" w="55" />
                             </div>
-                            <div className={styles.loadingRectangle + " ml-5 w-40 h-6 mt-1"}></div>
+                            <div className={styles.loadingRectangle + ' ml-5 w-40 h-6 mt-1'}></div>
                         </div>
                         <div className="w-3/5 flex flex-col justify-between md:w-5/6"></div>
                     </div>
@@ -101,7 +101,7 @@ const Friends = () => {
                         data-modal-target="crud-modal"
                         data-modal-toggle="crud-modal"
                         type="button"
-                        className={styles.button}
+                        className={styles.button + ' w-1/3 text-sm self-end'}
                     >
                         Nuevo amigo
                     </button>
