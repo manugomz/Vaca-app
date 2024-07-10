@@ -7,7 +7,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 const Friends = () => {
     const styles = {
         container: 'font-fredoka p-4 flex flex-col md:px-16 lg:px-24',
-        friendsContainer: `flex justify-around items-center
+        friendsContainer: `flex justify-between items-center
                 shadow-sombra
                 p-3 my-2 rounded-md
                 md:m-5
@@ -56,31 +56,60 @@ const Friends = () => {
                         md:px-3
                         xl:grid-cols-3"
                 >
+                    {
+                        //* --------------- friends skeletons-------------------
+                    }
                     <div className={styles.friendsContainer}>
                         <div
                             className="flex items-center 
-                                                        text-lg
-                                                        md:w-full md:bg-brown-p md:p-4"
+                                        gap-4
+                                        md:text-lg 
+                                        w-full md:bg-brown-p md:p-4"
                         >
                             <div className={styles.img + 'bg-zinc-300'}>
                                 <Logo bg="transparent" h="50" w="55" />
                             </div>
-                            <div className={styles.loadingRectangle + ' ml-5 w-40 h-6 mt-1'}></div>
+                            <div className=" w-2/3">
+                                <div
+                                    className={styles.loadingRectangle + ' w-40 md:w-32 h-6'}
+                                ></div>
+                                <div
+                                    className={styles.loadingRectangle + ' w-40 h-4 mt-2 md:hidden'}
+                                ></div>
+                            </div>
                         </div>
-                        <div className="w-3/5 flex flex-col justify-between md:w-5/6"></div>
+                        <div
+                            className={
+                                styles.loadingRectangle +
+                                ' w-40 h-4 mt-2 md:pt-2 text-sm overflow-hidden hidden md:flex'
+                            }
+                        ></div>
                     </div>
                     <div className={styles.friendsContainer}>
                         <div
                             className="flex items-center 
-                                                        text-lg
-                                                        md:w-full md:bg-brown-p md:p-4"
+                                        gap-4
+                                        md:text-lg 
+                                        w-full md:bg-brown-p md:p-4"
                         >
                             <div className={styles.img + 'bg-zinc-300'}>
                                 <Logo bg="transparent" h="50" w="55" />
                             </div>
-                            <div className={styles.loadingRectangle + ' ml-5 w-40 h-6 mt-1'}></div>
+                            <div className=" w-2/3 md:w-auto">
+                                <div
+                                    className={styles.loadingRectangle + ' w-40 md:w-32 h-6'}
+                                ></div>
+                                <div
+                                    className={styles.loadingRectangle + ' w-40 h-4 mt-2 md:hidden'}
+                                ></div>
+                            </div>
                         </div>
-                        <div className="w-3/5 flex flex-col justify-between md:w-5/6"></div>
+                        <div
+                            className={
+                                styles.loadingRectangle +
+                                ' w-40 h-4 mt-2 md:pt-2 text-sm overflow-hidden hidden md:flex'
+                            }
+                        ></div>
                     </div>
                 </div>
             </main>
@@ -119,8 +148,9 @@ const Friends = () => {
                                 <div className={styles.friendsContainer} key={user.userid}>
                                     <div
                                         className="flex items-center 
-                                                        text-lg
-                                                        md:w-full md:bg-brown-p md:p-4"
+                                                    gap-4
+                                                    md:text-lg 
+                                                    w-full md:bg-brown-p md:p-4"
                                     >
                                         <div
                                             className={styles.img}
@@ -128,11 +158,18 @@ const Friends = () => {
                                         >
                                             <Logo bg="transparent" h="50" w="55" />
                                         </div>
-                                        <p className="pl-2 text-brown-p md:text-white ">
-                                            {user.name}
-                                        </p>
+                                        <div className="overflow-clip w-2/3 md:w-auto">
+                                            <p className=" text-brown-p md:text-white ">
+                                                {user.name}
+                                            </p>
+                                            <p className="text-zinc-700 text-sm md:hidden">
+                                                {user.email}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div className="w-3/5 flex flex-col justify-between md:w-5/6"></div>
+                                    <div className="md:pt-2 text-sm overflow-hidden hidden md:flex">
+                                        {user.email}
+                                    </div>
                                 </div>
                             );
                         })}

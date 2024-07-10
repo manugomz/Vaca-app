@@ -38,13 +38,13 @@ export default function ModalConfirmation({ onClose, onDelete, id }) {
                 </button>
 
                 <IoAlertCircle className="text-5xl text-amber-400 w-full" />
-                <p>¿está seguro que desea eliminar el grupo?</p>
+                <p>¿está seguro que desea abandonar el grupo?</p>
                 <div className="w-full flex justify-around">
                     <button
                         type="submit"
                         className={style.buttonYes}
                         onClick={() => {
-                            onDelete(id);
+                            //onDelete(id);
                             onClose(true);
                         }}
                     >

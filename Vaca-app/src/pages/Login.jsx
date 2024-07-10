@@ -8,7 +8,9 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function Login() {
     const style = {
-        input: `w-full my-4 rounded-md border-slate-400 border-2 py-2 px-3 pr-5`,
+        input: `rounded-md border-2 border-slate-400
+                py-2 pl-3 pr-10 my-4
+                w-full`,
         button: `bg-brown-p rounded-md
             py-2 mt-2
             text-white text-center  

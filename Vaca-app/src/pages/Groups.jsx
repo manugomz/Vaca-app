@@ -170,7 +170,6 @@ const Groups = () => {
                 {modalConfirmOpen && (
                     <ModalConfirmation
                         id={currentId}
-                        onDelete={deleteGroup}
                         onClose={() => {
                             setCurrentId(0);
                             setModalConfirmOpen(false);
