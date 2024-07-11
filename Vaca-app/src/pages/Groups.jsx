@@ -2,11 +2,11 @@ import React from 'react';
 import useFetch from '../hooks/useFetch';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useMutation from '../hooks/useMutation';
 
 import CreateGroupModal from '../components/Modals/CreateGroupModal';
 import ModalConfirmation from '../components/Modals/ModalConfirmation';
 import SingleGroup from '../components/SingleGroup';
+import Toast from '../components/Toast';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -25,21 +25,28 @@ const Groups = () => {
         groupsContainer: `w-full flex flex-col 
                                 md:grid md:grid-cols-2 md:justify-around 
                                 md:px-3
-                                lg:grid-cols-3
-                                xl:grid-cols-4`,
+                                xl:grid-cols-3
+                                2xl:grid-cols-4`,
         loadingRectangle: 'bg-zinc-200 rounded-md animate-pulse',
         loadingButton: 'bg-zinc-300 rounded-md text-white px-3 py-1 shadow-sombra text-xs',
     };
 
+    const [currentId, setCurrentId] = useState(0);
     const [modalCreateOpen, setModalCreateOpen] = useState(false);
     const [modalConfirmOpen, setModalConfirmOpen] = useState(false);
-    const [currentId, setCurrentId] = useState(0);
+    const [toastOpen, setToastOpen] = useState(false);
+    const [toastMessage, setToastMessage] = useState(null);
 
     const navigate = useNavigate();
 
     const { data: groups, loading, error, reFetch } = useFetch(`${apiUrl}/groups/`);
 
     const total = -50_000;
+
+    const onCloseToast = () => {
+        setToastOpen(false);
+        setToastMessage(null);
+    };
 
     //*--------------------------------------------LOADER------------------------------------------------
     if (loading) {
@@ -182,7 +189,12 @@ const Groups = () => {
                         onClose={() => {
                             setModalCreateOpen(false);
                         }}
+                        setToastOpen={setToastOpen}
+                        setToastMessage={setToastMessage}
                     />
+                )}
+                {toastOpen && (
+                    <Toast message={toastMessage} onClose={onCloseToast} isOpen={toastOpen} />
                 )}
             </main>
         );

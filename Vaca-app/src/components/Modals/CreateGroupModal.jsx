@@ -5,7 +5,7 @@ import useMutation from '../../hooks/useMutation';
 import ColorSelector from '../ColorSelector';
 import Modal from './Modal';
 
-export default function CreateGroupModal({ onClose, reFetch }) {
+export default function CreateGroupModal({ onClose, reFetch, setToastOpen, setToastMessage }) {
     const style = {
         createButton: `bg-brown-p rounded-md 
                 px-3 py-1 mt-2
@@ -38,8 +38,10 @@ export default function CreateGroupModal({ onClose, reFetch }) {
         event.preventDefault();
         try {
             await createGroupMutation.mutate(newGroup);
+            setToastMessage('Grupo creado exitosamente');
             onClose();
             reFetch();
+            setToastOpen(true);
         } catch (e) {
             setErrors(e.message.split(','));
         }
