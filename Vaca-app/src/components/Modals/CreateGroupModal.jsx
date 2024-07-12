@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import CustomButton from '../CustomButton';
+
 import useMutation from '../../hooks/useMutation';
 
 import ColorSelector from '../ColorSelector';
@@ -7,13 +9,6 @@ import Modal from './Modal';
 
 export default function CreateGroupModal({ onClose, reFetch, setToastOpen, setToastMessage }) {
     const style = {
-        createButton: `bg-brown-p rounded-md 
-                px-3 py-1 mt-2
-                shadow-sombra
-                text-white text-xs 
-                md:text-base
-                hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
-                focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p disabled:opacity-50`,
         nameInput: `w-full my-2 pr-8 rounded-md border-slate-400 border-2 p-1 px-3`,
     };
 
@@ -74,14 +69,14 @@ export default function CreateGroupModal({ onClose, reFetch, setToastOpen, setTo
                 </div>
             </fieldset>
             <ColorSelector group={newGroup} setGroup={setNewGroup} />
-            <button
+            <CustomButton
                 type="submit"
-                className={style.createButton}
-                onClick={handleSubmit}
+                onClickFunction={handleSubmit}
                 disabled={!!errors || !newGroup.name}
+                otherStyles="mt-2"
             >
                 Crear
-            </button>
+            </CustomButton>
 
             <div className="text-red-p text-sm text-center h-[34px]">
                 {errors?.map((error, i) => (

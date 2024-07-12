@@ -2,18 +2,12 @@ import React from 'react';
 import useFetch from '../../hooks/useFetch';
 import { IoClose } from 'react-icons/io5';
 
+import CustomButton from '../CustomButton';
+
 //TODO change message when send form and check radio buttons
 
 export default function AddFriendToGroup({ onClose, groupId }) {
     const style = {
-        button: `bg-brown-p rounded-md 
-            w-2/3 mt-2 py-1 my-2
-            shadow-sombra
-            text-white
-            md:text-xl
-            hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
-            focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p`,
-
         modalBackground: `fixed left-0 top-0 
                     flex justify-center 
                     w-full h-full 
@@ -56,18 +50,16 @@ export default function AddFriendToGroup({ onClose, groupId }) {
                                 );
                             })}
                     </ul>
-                    <div className="w-full flex justify-around">
-                        <button
-                            type="submit"
-                            className={style.button}
-                            onClick={() => {
-                                onAdd(id);
-                                onClose(true);
-                            }}
-                        >
-                            Agregar
-                        </button>
-                    </div>
+
+                    <CustomButton
+                        type="submit"
+                        
+                        otherStyles=" w-full"
+                        onClickFunction={() => {
+                            onAdd(id);
+                            onClose(true);
+                        }}
+                    >Agregar</CustomButton>
                 </form>
             </dialog>
         </div>

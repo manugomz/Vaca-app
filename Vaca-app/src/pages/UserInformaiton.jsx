@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from '../components/Logo';
+import CustomButton from '../components/CustomButton';
 
 const UserInformation = () => {
     const styles = {
@@ -32,15 +33,17 @@ const UserInformation = () => {
                 />
                 <div className="grid grid-cols-3 px-5">
                     <p>Nombre: </p>
-                    <p className='col-span-2'> {user.name}</p>
+                    <p className="col-span-2"> {user.name}</p>
                     <p>Correo: </p>
-                    <p className='col-span-2'>{user.email}</p>
+                    <p className="col-span-2">{user.email}</p>
                 </div>
             </div>
-                <button className={styles.button + ' mt-4 w-44 self-center'}>Editar información</button>
+            <CustomButton otherStyles="mt-4 w-44 self-center">Editar información</CustomButton>
             <div className="flex flex-col w-full items-center self-end">
-                <button className={styles.button + ' w-40'}>Log out</button>
-                <button className={styles.secondaryButton + ' w-40'}>Delete account</button>
+                <CustomButton otherStyles="w-40">Log out</CustomButton>
+                <CustomButton variant="secondary" otherStyles="w-40 mt-5">
+                    Delete account
+                </CustomButton>
             </div>
         </main>
     );

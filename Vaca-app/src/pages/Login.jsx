@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import LogoDecoration from '../assets/LogoDecoration.svg?react';
 import useMutation from '../hooks/useMutation';
+import CustomButton from '../components/CustomButton';
+
+//! MISSING CUSTOM BUTTON ON LOGIN; REGISTER AND USERINFORMATION PAGES
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -11,18 +14,6 @@ export default function Login() {
         input: `rounded-md border-2 border-slate-400
                 py-2 pl-3 pr-10 my-4
                 w-full`,
-        button: `bg-brown-p rounded-md
-            py-2 mt-2
-            text-white text-center  
-            hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
-            focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p
-            active:outline-none active:bg-zinc-300 active:ring-brown-p`,
-        buttonSecondary: `bg-white rounded-md 
-        w-full py-2 mt-2
-        text-brown-p text-center
-        border-brown-p border-2 
-        hover:bg-zinc-100 hover:ring-2 hover:ring-brown-p hover:border-zinc-100
-            focus:bg-zinc-300 focus:ring-2 focus:ring-white focus:border-brown-p`,
     };
 
     const [errors, setErrors] = useState([]);
@@ -72,15 +63,14 @@ export default function Login() {
                 >
                     Regístrate para crear una vaca con tus amigos
                 </p>
-                <button
-                    type="button"
-                    className={style.button + ' w-1/3 mt-16 hidden lg:inline'}
-                    onClick={() => {
+                <CustomButton
+                    onClickFunction={() => {
                         navigate(`/registro`);
                     }}
+                    otherStyles=" w-1/3 mt-16 hidden lg:inline"
                 >
                     Registro
-                </button>
+                </CustomButton>
             </div>
             <form
                 action="POST"
@@ -136,24 +126,22 @@ export default function Login() {
                         {error}
                     </p>
                 ))}
-                <button
+                <CustomButton
                     type="submit"
-                    className={
-                        style.button + ' w-full self-center lg:w-1/3 lg:bg-brown-p-light lg:mt-8'
-                    }
-                    onClick={handleSubmit}
+                    onClickFunction={handleSubmit}
+                    otherStyles="w-full self-center lg:w-1/3 lg:bg-brown-p-light mt-8 "
                 >
                     Ingresar
-                </button>
-                <button
-                    type="button"
-                    className={style.buttonSecondary + ' lg:hidden'}
-                    onClick={() => {
+                </CustomButton>
+                <CustomButton
+                    variant="secondary"
+                    otherStyles="lg:hidden mt-3"
+                    onClickFunction={() => {
                         navigate(`/registro`);
                     }}
                 >
                     Registrarme
-                </button>
+                </CustomButton>
             </form>
         </div>
     );

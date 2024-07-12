@@ -9,21 +9,9 @@ import AddFriendToGroup from '../components/Modals/AddFriendToGroupModal';
 
 import useFetch from '../hooks/useFetch';
 import useMutation from '../hooks/useMutation';
+import CustomButton from '../components/CustomButton';
 
 export default function GroupDetails() {
-    const styles = {
-        container: `justify-around items-center
-                shadow-sombra
-                px-5 py-3 my-2 rounded-md`,
-        button: `bg-brown-p rounded-md 
-                px-3 py-1
-                shadow-sombra
-                text-white text-xs
-                md:text-base
-                hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
-                focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p`,
-    };
-
     const apiUrl = import.meta.env.VITE_API_URL;
 
     const { id } = useParams();
@@ -69,14 +57,17 @@ export default function GroupDetails() {
 
     return (
         <main className="font-fredoka px-4">
-            <section className="flex justify-around pt-5 py">
-                <button className={styles.button}>Nuevo Gasto</button>
-                <button className={styles.button} onClick={() => setModalAddFriendOpen(true)}>
+            <section className="flex justify-around pt-5 pb-3">
+                <CustomButton otherStyles="text-sm">Nuevo Gasto</CustomButton>
+                <CustomButton
+                    otherStyles="text-sm"
+                    onClickFunction={() => setModalAddFriendOpen(true)}
+                >
                     Nuevo Amigo
-                </button>
-                <button className={styles.button} onClick={() => setModalEditOpen(true)}>
+                </CustomButton>
+                <CustomButton otherStyles="text-sm" onClickFunction={() => setModalEditOpen(true)}>
                     Editar Grupo
-                </button>
+                </CustomButton>
             </section>
 
             <SingleGroup group={singleGroup}>
@@ -94,12 +85,12 @@ export default function GroupDetails() {
                     Participantes:{' '}
                     <strong style={{ color: singleGroup.color }}>{usersGroup.length}</strong>
                 </p>
-                <button
-                    className={styles.button + ' self-start mt-1'}
-                    onClick={() => setModalDeleteOpen(true)}
+                <CustomButton
+                    onClickFunction={() => setModalDeleteOpen(true)}
+                    otherStyles="self-start mt-1 text-xs"
                 >
-                    Eliminar grupo
-                </button>
+                    Eliminar Grupo
+                </CustomButton>
             </SingleGroup>
 
             <h2 className=" text-amber-400 text-lg">GASTOS</h2>
@@ -107,7 +98,12 @@ export default function GroupDetails() {
                 <h3>Enero 2024</h3>
                 {group?.expenses?.map((expense) => {
                     return (
-                        <div className={styles.container} key={expense.name}>
+                        <div
+                            className="justify-around items-center
+                                        shadow-sombra
+                                        px-5 py-3 my-2 rounded-md"
+                            key={expense.name}
+                        >
                             <p className="text-sm">
                                 {expense.name} - participaron {expense.members} personas
                             </p>
@@ -123,8 +119,8 @@ export default function GroupDetails() {
                                 {expense.participation === 'paid' && 'presté'}
                             </p>
                             <div className="flex gap-3 pt-1">
-                                <button className={styles.button}>Editar</button>
-                                <button className={styles.button}>Eliminar</button>
+                                <CustomButton otherStyles="text-xs">Editar</CustomButton>
+                                <CustomButton otherStyles="text-xs">Eliminar</CustomButton>
                             </div>
                         </div>
                     );

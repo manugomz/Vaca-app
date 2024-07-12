@@ -7,6 +7,7 @@ import CreateGroupModal from '../components/Modals/CreateGroupModal';
 import ModalConfirmation from '../components/Modals/ModalConfirmation';
 import SingleGroup from '../components/SingleGroup';
 import Toast from '../components/Toast';
+import CustomButton from '../components/CustomButton';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -58,7 +59,7 @@ const Groups = () => {
                     md:justify-between md:my-[4vh]"
                 >
                     <p className="text-4xl hidden md:inline">GRUPOS</p>
-                    <button className={styles.button + ' opacity-50 self-end'}>Nuevo grupo</button>
+                    <CustomButton otherStyles="self-end max-w-48">Nuevo Grupo</CustomButton>
                 </div>
                 <div className="md:my-[3vh]">
                     <div className={styles.loadingRectangle + ' w-1/6 h-5 mt-1'}></div>
@@ -69,8 +70,8 @@ const Groups = () => {
                         <div className={styles.loadingRectangle + ' w-4/6 h-5 my-2'}></div>
                         <div className={styles.loadingRectangle + ' w-4/6 h-5 mb-2'}></div>
                         <div className="flex gap-3 pt-1">
-                            <button className={styles.loadingButton}>Editar</button>
-                            <button className={styles.loadingButton}>Eliminar</button>
+                            <CustomButton otherStyles="text-sm py-0">Ver</CustomButton>
+                            <CustomButton otherStyles="text-sm py-0">Abandonar</CustomButton>
                         </div>
                     </SingleGroup>
                 </div>
@@ -100,15 +101,12 @@ const Groups = () => {
                     md:justify-between md:my-[4vh]"
                 >
                     <h2 className="text-4xl hidden md:inline">GRUPOS</h2>
-                    <button
-                        data-modal-target="crud-modal"
-                        data-modal-toggle="crud-modal"
-                        type="button"
-                        className={styles.button + ' w-1/3 text-sm self-end'}
-                        onClick={() => setModalCreateOpen(true)}
+                    <CustomButton
+                        otherStyles="w-1/3 max-w-48 text-sm self-end"
+                        onClickFunction={() => setModalCreateOpen(true)}
                     >
-                        Nuevo grupo
-                    </button>
+                        Nuevo Grupo
+                    </CustomButton>
                 </div>
                 <div className="md:my-[3vh]">
                     <p className="">Debes</p>
@@ -151,24 +149,23 @@ const Groups = () => {
                                     )}
 
                                     <div className="flex gap-3 pt-1">
-                                        <button
-                                            className={styles.button}
-                                            onClick={() => {
+                                        <CustomButton
+                                            otherStyles="text-sm py-0 w-5/12"
+                                            onClickFunction={() => {
                                                 navigate(`/grupos/${group.id}`);
                                             }}
                                         >
                                             Ver
-                                        </button>
-
-                                        <button
-                                            className={styles.button}
-                                            onClick={() => {
+                                        </CustomButton>
+                                        <CustomButton
+                                            otherStyles="text-sm py-0 px-0 w-5/12"
+                                            onClickFunction={() => {
                                                 setModalConfirmOpen(true);
                                                 setCurrentId(group.id);
                                             }}
                                         >
                                             Abandonar
-                                        </button>
+                                        </CustomButton>
                                     </div>
                                 </SingleGroup>
                             );
