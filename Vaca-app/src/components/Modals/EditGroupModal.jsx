@@ -4,20 +4,9 @@ import useMutation from '../../hooks/useMutation';
 
 import ColorSelector from '../ColorSelector';
 import Modal from './Modal';
+import CustomButton from '../CustomButton';
 
 export default function EditGroupModal({ onClose, reFetch, groupInfo }) {
-    const style = {
-        createButton: `bg-brown-p rounded-md 
-                px-3 py-1 mt-1
-                shadow-sombra
-                text-white text-xs text-center
-                md:text-xl
-                hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
-                focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p disabled:opacity-50`,
-
-        nameInput: `w-full my-2 pr-8 rounded-md border-slate-400 border-2 p-1 px-3`,
-    };
-
     const [errors, setErrors] = useState(null);
     const [group, setGroup] = useState({
         ownerUserId: 1,
@@ -63,7 +52,8 @@ export default function EditGroupModal({ onClose, reFetch, groupInfo }) {
                         name="name"
                         type="text"
                         maxLength="30"
-                        className={style.nameInput}
+                        className="w-full rounded-md border-slate-400 border-2 
+                                    my-2 p-1 px-3 pr-8"
                         value={group.name}
                         onChange={handleInputChange}
                         autoFocus
@@ -78,14 +68,13 @@ export default function EditGroupModal({ onClose, reFetch, groupInfo }) {
                 </div>
             </fieldset>
             <ColorSelector group={group} setGroup={setGroup} />
-            <button
+            <CustomButton
                 type="submit"
-                className={style.createButton}
-                onClick={handleSubmit}
+                onClickFunction={handleSubmit}
                 disabled={!!errors || !group.name}
             >
                 Actualizar
-            </button>
+            </CustomButton>
 
             <div className="text-red-p text-xs text-center h-[32px]">
                 {errors?.map((error, i) => (

@@ -1,21 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 
-import LogoDecoration from '../assets/LogoDecoration.svg?react';
+import LogoDecoration from '../assets/LogoDecoration.svg';
 import useMutation from '../hooks/useMutation';
+import CustomButton from '../components/CustomButton';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function Register() {
     const style = {
         input: `w-full my-4 rounded-md border-slate-400 border-2 py-2 px-3`,
-        button: `bg-brown-p rounded-md 
-                py-2 mt-2 
-                shadow-sombra 
-                text-white  text-center 
-                hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
-                focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p
-                active:outline-none active:bg-zinc-300 active:ring-brown-p`,
     };
 
     const [newUser, setNewUser] = useState();
@@ -67,7 +61,12 @@ export default function Register() {
                             pt-10
                             lg:pt-0 lg:w-[50vw]"
             >
-                <LogoDecoration width={240} />
+                <img
+                    src="../src/assets/LogoDecoration.svg"
+                    alt="Mi vaquita, comparte gastos con tus amigos"
+                    className="md:h-64 h-48"
+                />
+
                 <p
                     className="hidden 
                             mt-5
@@ -84,15 +83,14 @@ export default function Register() {
                 >
                     Haz click en el botón para iniciar sesión
                 </p>
-                <button
-                    type="button"
-                    className={style.button + ' w-1/3 mt-16 hidden lg:inline'}
-                    onClick={() => {
+                <CustomButton
+                    onClickFunction={() => {
                         navigate(`/login`);
                     }}
+                    otherStyles={'w-1/3 mt-16 hidden lg:inline'}
                 >
                     Iniciar sesión
-                </button>
+                </CustomButton>
             </div>
             <form
                 action="POST"
@@ -161,17 +159,13 @@ export default function Register() {
                             className="absolute top-6 right-3"
                         />
                     </div>
-
-                    <button
+                    <CustomButton
                         type="submit"
-                        className={
-                            style.button +
-                            '  w-full self-center lg:w-3/4 lg:bg-brown-p-light lg:mt-10'
-                        }
-                        onClick={handleSubmit}
+                        otherStyles="w-full self-center lg:w-3/4 lg:bg-brown-p-light mt-10"
+                        onClickFunction={handleSubmit}
                     >
                         Registrarme
-                    </button>
+                    </CustomButton>
 
                     <ul className="list-disc pl-5 pt-5">
                         {errorMessages?.map((error, index) => (

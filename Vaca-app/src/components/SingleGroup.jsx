@@ -11,7 +11,6 @@ const SingleGroup = ({ group, loading, children }) => {
         img: `flex justify-center items-center 
             size-[4.5em] rounded-md `,
         loadingRectangle: ' bg-zinc-200 rounded-md animate-pulse',
-        loadingButton: ' text-zinc-400 px-3 py-1 shadow-sombra text-xs md:text-base',
     };
     // Container
     if (group) {

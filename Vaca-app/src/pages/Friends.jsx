@@ -1,6 +1,7 @@
 import React from 'react';
 import useFetch from '../hooks/useFetch';
 import Logo from '../components/Logo';
+import CustomButton from '../components/CustomButton';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -12,15 +13,6 @@ const Friends = () => {
                 p-3 my-2 rounded-md
                 md:m-5
                 md:flex-col md:w-72`,
-        button: `bg-brown-p rounded-md
-                min-w-20 px-3 py-1 max-w-40
-                shadow-sombra 
-                text-white text-xs 
-                md:text-base
-                hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
-                focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p
-                active:outline-none active:bg-zinc-300 active:ring-brown-p
-                md:py-2`,
         img: `flex justify-center items-center
             size-[4.5em] rounded-md `,
         loadingRectangle: 'bg-zinc-200 rounded-md animate-pulse',
@@ -41,14 +33,7 @@ const Friends = () => {
                     md:justify-between md:my-[4vh]"
                 >
                     <h2 className="text-4xl hidden md:inline">Amigos</h2>
-                    <button
-                        data-modal-target="crud-modal"
-                        data-modal-toggle="crud-modal"
-                        type="button"
-                        className={styles.button}
-                    >
-                        Nuevo amigo
-                    </button>
+                    <CustomButton otherStyles="w-1/3 max-w-48 text-sm self-end">Nuevo Amigo</CustomButton>
                 </div>
                 <div
                     className="w-full flex flex-col 
@@ -126,14 +111,7 @@ const Friends = () => {
                     md:justify-between md:my-[4vh]"
                 >
                     <h2 className="text-4xl hidden md:inline">Amigos</h2>
-                    <button
-                        data-modal-target="crud-modal"
-                        data-modal-toggle="crud-modal"
-                        type="button"
-                        className={styles.button + ' w-1/3 text-sm self-end'}
-                    >
-                        Nuevo amigo
-                    </button>
+                    <CustomButton otherStyles="w-1/3 max-w-48 text-sm self-end">Nuevo Amigo</CustomButton>
                 </div>
 
                 <div
