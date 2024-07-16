@@ -1,25 +1,8 @@
 import React from 'react';
-import Logo from '../components/Logo';
 import CustomButton from '../components/CustomButton';
 
 const UserInformation = () => {
-    const styles = {
-        button: `bg-brown-p rounded-md
-        min-w-20 px-3 py-2 
-        shadow-sombra 
-        text-white 
-        md:text-base
-        hover:bg-yellow-800 hover:ring-2 hover:ring-brown-p
-        focus:bg-zinc-300 focus:ring-2 focus:ring-brown-p focus:text-brown-p
-        active:outline-none active:bg-zinc-300 active:ring-brown-p
-        md:py-2`,
-        secondaryButton: `bg-white rounded-md 
-        w-full py-2 mt-3
-        text-brown-p text-center
-        border-brown-p border-2 
-        hover:bg-zinc-100 hover:ring-2 hover:ring-brown-p hover:border-zinc-100
-            focus:bg-zinc-300 focus:ring-2 focus:ring-white focus:border-brown-p`,
-    };
+
 
     const user = JSON.parse(window.sessionStorage.user);
     return (
